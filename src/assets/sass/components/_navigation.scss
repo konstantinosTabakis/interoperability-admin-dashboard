@@ -1,0 +1,28 @@
+.navigation{
+    background: $color-gray-menu;
+    width: 30%;
+    max-width: 350px;
+    padding: $padding-default;
+    box-shadow: $shadow-primary;
+    border-radius: 0 12px 12px 0;
+    // box-shadow: 10px 0 5px -2px #888;
+    color: $color-white;
+    .logo{
+        padding-bottom: 2rem;
+        border-bottom: 1px solid  rgba($color-gray-light, .2);
+    }
+    &__menu-item{
+        color: $color-white;
+        transition: .6s;
+        margin-bottom: 3rem;
+        font-weight: 300;
+        font-size: 2rem;
+        display: block;
+        cursor: pointer;
+        &:hover,
+        &.active{
+            color: $color-primary;
+        }
+        
+    }
+}

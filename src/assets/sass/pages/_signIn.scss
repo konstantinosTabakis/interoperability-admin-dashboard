@@ -1,0 +1,24 @@
+.sign-in-form{
+    @include absolute-center;
+    width: 95%;
+    max-width: 500px;
+
+    label,input{
+        display: block;
+    }
+    label{
+        margin-bottom: 10px;
+        font-weight: 500;
+    }
+    input{
+        border: none;
+        background: #f7f7f7;
+        box-shadow: $shadow-secondary;
+        border-radius: 8px;
+        padding: 1rem;
+        outline: none;
+        color: #777;
+        letter-spacing: 1px;
+        font-size: 1.4rem;
+    }
+}

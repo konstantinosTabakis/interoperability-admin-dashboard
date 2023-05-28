@@ -1,0 +1,39 @@
+.card{
+    background: $color-white;
+    border-radius: 12px;
+    padding: $padding-default;
+    box-shadow: $shadow-secondary;
+
+    &__inner{
+        @include flex(space-around, center, 40px);
+        flex-wrap: wrap;
+        &-item{
+            @include flex(unset, center, 10px);
+            .icon-area{
+                // background: $color-bg-light;
+                background: $color-tertiary;
+                box-shadow: $shadow-secondary;
+                border-radius: 50%;
+                display: flex;
+                padding: 20px;
+                // width: 200px;
+                // height: 200px;
+                img{
+                    width: 50px;
+                    // min-width: 40px;
+                    height: 50px;
+                    // height: 100px;
+                }
+            }
+            span{
+                display: block;
+                font-weight: 600;
+                font-size: 2.4rem;
+            }
+
+        }
+    }
+}
+.card-small{
+    padding: 1.6rem;
+}

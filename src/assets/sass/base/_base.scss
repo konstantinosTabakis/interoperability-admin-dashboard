@@ -1,0 +1,27 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+ 
+body {
+    box-sizing: border-box;
+    background-color: $color-bg-light;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+textarea{
+    resize: none;
+}
+.app{
+    &__inner{
+        width: 100%;
+        @include flex(unset,unset,5px)
+    }
+}

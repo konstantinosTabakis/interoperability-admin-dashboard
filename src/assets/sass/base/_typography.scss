@@ -1,0 +1,25 @@
+@font-face {
+    font-family: montserrat;
+    src: url(../fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: montserrat, sans-serif;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.7;
+    color: $color-gray-dark;
+}
+
+.heading-primary{
+    font-size: 3.2rem;
+    font-weight: 500;
+}
+.heading-secondary{
+    font-size: 2rem;
+    font-weight: 500;
+}
