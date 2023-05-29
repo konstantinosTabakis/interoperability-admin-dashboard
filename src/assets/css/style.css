@@ -1,14 +1,22 @@
 .navigation {
-  background: #817e7e;
+  background: #5a4c4c;
   width: 30%;
   max-width: 350px;
   padding: 3.2rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0 12px 12px 0;
   color: #fff; }
-  .navigation .logo {
+  .navigation .loggedUser {
+    font-weight: 300;
+    font-size: 1.4rem;
     padding-bottom: 2rem;
     border-bottom: 1px solid rgba(238, 238, 238, 0.2); }
+    .navigation .loggedUser img {
+      width: 50px; }
+    .navigation .loggedUser span {
+      display: block; }
+    .navigation .loggedUser .email {
+      font-weight: 500; }
   .navigation__menu-item {
     color: #fff;
     transition: .6s;
@@ -18,7 +26,7 @@
     display: block;
     cursor: pointer; }
     .navigation__menu-item:hover, .navigation__menu-item.active {
-      color: #DBA39A; }
+      font-weight: 600; }
 
 .card {
   background: #fff;
@@ -29,7 +37,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    gap: 40px;
+    gap: 0;
     flex-wrap: wrap; }
     .card__inner-item {
       display: flex;
@@ -43,8 +51,8 @@
         display: flex;
         padding: 20px; }
         .card__inner-item .icon-area img {
-          width: 50px;
-          height: 50px; }
+          width: 40px;
+          height: 40px; }
       .card__inner-item span {
         display: block;
         font-weight: 600;
@@ -167,7 +175,7 @@ body {
   font-weight: 500; }
 
 .heading-secondary {
-  font-size: 2rem;
+  font-size: 2.4rem;
   font-weight: 500; }
 
 .btn {

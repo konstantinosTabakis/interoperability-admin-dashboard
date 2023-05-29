@@ -1,5 +1,6 @@
 .navigation{
     background: $color-gray-menu;
+    // background: $color-tertiary;
     width: 30%;
     max-width: 350px;
     padding: $padding-default;
@@ -7,12 +8,24 @@
     border-radius: 0 12px 12px 0;
     // box-shadow: 10px 0 5px -2px #888;
     color: $color-white;
-    .logo{
+    .loggedUser{
+        img{
+            width: 50px;
+        }
+        span{
+            display: block;
+        }
+        .email{
+            font-weight: 500;
+        }
+        font-weight: 300;
+        font-size: 1.4rem;
         padding-bottom: 2rem;
         border-bottom: 1px solid  rgba($color-gray-light, .2);
     }
     &__menu-item{
         color: $color-white;
+        // color: $color-gray-dark;
         transition: .6s;
         margin-bottom: 3rem;
         font-weight: 300;
@@ -21,7 +34,9 @@
         cursor: pointer;
         &:hover,
         &.active{
-            color: $color-primary;
+            // color: $color-primary;
+            // color: $color-black;
+            font-weight: 600;
         }
         
     }

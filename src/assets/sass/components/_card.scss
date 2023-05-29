@@ -5,8 +5,10 @@
     box-shadow: $shadow-secondary;
 
     &__inner{
-        @include flex(space-around, center, 40px);
+        @include flex(space-around, center);
         flex-wrap: wrap;
+        // max-width: 900px;
+        // background: red;
         &-item{
             @include flex(unset, center, 10px);
             .icon-area{
@@ -19,14 +21,15 @@
                 // width: 200px;
                 // height: 200px;
                 img{
-                    width: 50px;
+                    width: 40px;
                     // min-width: 40px;
-                    height: 50px;
+                    height: 40px;
                     // height: 100px;
                 }
             }
             span{
                 display: block;
+                // text-align: center;
                 font-weight: 600;
                 font-size: 2.4rem;
             }
