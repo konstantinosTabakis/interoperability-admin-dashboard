@@ -12,6 +12,12 @@ const SurveyReducer = (state, action) => {
                 surveys: [...state.surveys , action.survey] ,
                 numberOfSurveys: state.numberOfSurveys +1
             }
+        case 'DELETE_SURVEY':
+            return {
+                ...state,
+                surveys: [...state.surveys.filter(el => el.id != action.id)] ,
+                numberOfSurveys: state.numberOfSurveys -1
+            }
         case 'SET_QUESTIONS':
             return {
                 ...state,

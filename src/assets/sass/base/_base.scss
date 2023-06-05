@@ -22,6 +22,7 @@ textarea{
 .app{
     &__inner{
         width: 100%;
-        @include flex(unset,unset,5px)
+        @include flex(unset,unset,5px);
+        position: relative;
     }
 }

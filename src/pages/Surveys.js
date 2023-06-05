@@ -3,6 +3,7 @@ import SurveyContext from "../context/SurveyContext"
 import Survey from "../components/Survey"
 import { useEffect } from "react"
 import { getAllSurveys } from "../db/db-services"
+import { motion, AnimatePresence } from 'framer-motion'
 
 
 function Surveys() {
@@ -14,17 +15,26 @@ function Surveys() {
             dispatch({ type: 'SET_SURVEYS', surveys })
         };
 
-        if (surveys.length===0) fetchSurveys()
+        if (surveys.length === 0) fetchSurveys()
 
     }, [])
 
     return (
         <section className="surveys">
-            <h4 className="heading-primary mg-b-medium">Surveys</h4>
+            <h4 className="heading-primary ">Surveys</h4>
+            <p className="mg-b-medium">Total: {surveys.length}</p>
             <div>
-                {surveys.map((el) => (
-                    <Survey key={el.id} survey={el} />
-                ))}
+                <AnimatePresence>
+                    {surveys.map((el) => (
+                        <motion.div  key={el.id}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }} >
+                                <Survey  survey={el} />
+
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
             </div>
         </section>
     )

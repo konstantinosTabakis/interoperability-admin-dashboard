@@ -25,11 +25,11 @@ function Menu() {
             </div>
             <div className="navigation__menu">
                 <ul className="centered">
-                    <li><NavLink className="navigation__menu-item" to='/'>Home</NavLink></li>
-                    <li><NavLink className="navigation__menu-item" to='/surveys'>Surveys</NavLink></li>
-                    <li><NavLink className="navigation__menu-item" to='/newSurvey'>New Survey</NavLink></li>
-                    {/* <li><NavLink className="navigation__menu-item" to='/questions'>Questions</NavLink></li> */}
-                    <li><NavLink className="navigation__menu-item" to='/users'>Users</NavLink></li>
+                    <li><NavLink className="navigation__menu-item" to='/'> <span>Home</span>  </NavLink></li>
+                    <li><NavLink className="navigation__menu-item" to='/surveys'>  <span>Surveys</span>  </NavLink></li>
+                    <li><NavLink className="navigation__menu-item" to='/newSurvey'> <span>New Survey</span> </NavLink></li>
+                    <li><NavLink className="navigation__menu-item" to='/questions'>Questions</NavLink></li>
+                    <li><NavLink className="navigation__menu-item" to='/users'> <span>Users</span> </NavLink></li>
                     <li className="navigation__menu-item mx-auto button" onClick={handleLogOut}>  Log out</li>
                 </ul>
                 

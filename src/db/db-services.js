@@ -8,14 +8,20 @@ import {
     updateDoc,
     deleteDoc,
     doc,
-    getCountFromServer
+    setDoc,
+    getCountFromServer,
+    serverTimestamp
 } from "firebase/firestore";
+
+import {
+    getAuth,
+    createUserWithEmailAndPassword
+} from 'firebase/auth'
 
 
 //users
 
 export const getAllUsers = async () => {
-    // console.log('getAllUsers Called');
     const coll = collection(db, 'users');
     const querySnapshot = await getDocs(coll);
 
@@ -23,7 +29,30 @@ export const getAllUsers = async () => {
     return users;
 };
 
-export const addUser = async () => {
+export const getUser = async (id) => {
+    const coll = doc(db, "users", id);
+    return (await getDoc(coll)).data();
+}
+
+export const addUser = async (userData) => {
+    try {
+        const auth = getAuth()
+        const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            userData.email,
+            userData.password
+        )
+        const user = userCredential.user
+        const created_at = await serverTimestamp()
+
+        const data = { name: userData.name,email: userData.email, role: userData.role, created_at}
+
+        await setDoc(doc(db, 'users', user.uid), data)
+        return data
+    } catch( error){
+        console.log(error);
+        alert('User Creation Failed')
+    }
 
 }
 
@@ -34,9 +63,9 @@ export const getAllSurveys = async () => {
     const querySnapshot = await getDocs(coll);
 
     const surveys = querySnapshot.docs.map((doc) => {
-        const surveyData= doc.data()
-        const surveyId= doc.id
-        return {id: surveyId, ...surveyData}
+        const surveyData = doc.data()
+        const surveyId = doc.id
+        return { id: surveyId, ...surveyData }
     });
     return surveys;
 }
@@ -50,8 +79,9 @@ export const createSurvey = async (newSurvey) => {
     return await addDoc(coll, newSurvey);
 }
 
-export const deleteSurvey = async () => {
-
+export const deleteSurvey = async (id) => {
+    const coll = doc(db, "surveys", id);
+    return await deleteDoc(coll);
 }
 
 //questions

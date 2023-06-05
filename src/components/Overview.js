@@ -1,4 +1,8 @@
 import VerticalBar from "./charts/VerticalBar"
+import surveyIcon from '../assets/img/survey.png'
+import usersIcon from '../assets/img/users.png'
+import evaluationIcon from '../assets/img/evaluation.png'
+import questionIcon from '../assets/img/questions.png'
 
 
 function Overview({ users, surveys, questions }) {
@@ -24,8 +28,7 @@ function Overview({ users, surveys, questions }) {
       <div className="card__inner mg-b-big mx-auto">
         <div className="card__inner-item">
           <div className='icon-area centered'>
-            {/* <img src="https://cdn-icons-png.flaticon.com/512/5493/5493649.png" alt="" /> */}
-            <img src="https://cdn-icons-png.flaticon.com/512/694/694642.png" alt="" />
+            <img src={usersIcon} alt="users icon" />
           </div>
           <div>
              Users:
@@ -34,7 +37,7 @@ function Overview({ users, surveys, questions }) {
         </div>
         <div className="card__inner-item">
           <div className='icon-area centered'>
-            <img src="https://cdn-icons-png.flaticon.com/512/839/839860.png" alt="" />
+            <img src={surveyIcon} alt="survey icon" />
           </div>
           <div>
              Surveys:
@@ -43,7 +46,7 @@ function Overview({ users, surveys, questions }) {
         </div>
         <div className="card__inner-item">
           <div className='icon-area centered'>
-            <img src="https://cdn-icons-png.flaticon.com/512/7961/7961078.png" alt="" />
+            <img src={evaluationIcon} alt="evaluation icon" />
           </div>
           <div>
             Evaluations:
@@ -52,7 +55,7 @@ function Overview({ users, surveys, questions }) {
         </div>
         <div className="card__inner-item">
           <div className='icon-area centered'>
-            <img src="https://cdn-icons-png.flaticon.com/512/9425/9425588.png" alt="" />
+            <img src={questionIcon} alt="question icon" />
           </div>
           <div>
              Questions:

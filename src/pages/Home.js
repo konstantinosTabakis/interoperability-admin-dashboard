@@ -3,21 +3,13 @@ import Overview from "../components/Overview"
 import { getAllUsers, getAllSurveys, getAllQuestions } from "../db/db-services"
 import UserContext from "../context/UserContext"
 import SurveyContext from "../context/SurveyContext"
-import VerticalBar from "../components/charts/VerticalBar"
 
 
 function Home() {
   const { users, numberOfUsers, currentUserEmail, dispatch: userDispatch } = useContext(UserContext)
   const { surveys, numberOfSurveys, questions, numberOfQuestions, dispatch: surveyDispatch } = useContext(SurveyContext)
 
-  // const chartData = {
-  //   labels: ['users', 'surveys', 'questions'],
-  //   datasets: [{
-  //     data: [numberOfUsers, numberOfSurveys, numberOfQuestions],
-  //     backgroundColor: ['#666AF6', '#F666B2', '#F6F266', '#66F6AA']
-  //   },
-  //   ]
-  // }
+   
 
   useEffect(() => {
 

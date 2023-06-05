@@ -1,0 +1,70 @@
+.survey {
+    position: relative;
+    [type='checkbox'] {
+        display: none;
+    }
+
+
+    [type='checkbox'] {
+        &~label {
+            color: $color-primary;
+            cursor: pointer;
+            @include flex(left, center, 0);
+
+            &:hover {
+                font-weight: 500;
+            }
+
+            &::after {
+                content: '+';
+                margin-left: 1.3rem;
+                font-size: 3rem;
+            }
+        }
+
+        &~div {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .3s ease-out;
+            background: $color-gray-light-1;
+
+            ol {
+                padding: 1.6rem;
+                margin-left: 1.6rem;
+                li{
+                    list-style:auto;
+                    padding: 1rem;
+                }
+
+            }
+        }
+    }
+
+    [type='checkbox']:checked {
+        &~label {
+            &::after {
+                content: '-';
+            }
+        }
+
+        &~div {
+            max-height: 400px;
+            overflow: auto;
+            transition: max-height .8s ease-out;            
+        }
+    }
+    .icon-area{
+        background: $color-tertiary;
+        position: absolute;
+        right: 3.2rem;
+        border-radius: 50%;
+        padding: 1rem 1.5rem;
+        img{
+            width: 30px;
+        }
+    }
+
+
+
+
+}

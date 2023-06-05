@@ -7,29 +7,21 @@
     &__inner{
         @include flex(space-around, center);
         flex-wrap: wrap;
-        // max-width: 900px;
-        // background: red;
         &-item{
             @include flex(unset, center, 10px);
             .icon-area{
-                // background: $color-bg-light;
                 background: $color-tertiary;
                 box-shadow: $shadow-secondary;
                 border-radius: 50%;
                 display: flex;
                 padding: 20px;
-                // width: 200px;
-                // height: 200px;
                 img{
                     width: 40px;
-                    // min-width: 40px;
                     height: 40px;
-                    // height: 100px;
                 }
             }
             span{
                 display: block;
-                // text-align: center;
                 font-weight: 600;
                 font-size: 2.4rem;
             }

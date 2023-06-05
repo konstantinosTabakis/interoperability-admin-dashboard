@@ -9,7 +9,9 @@ export const UserProvider = ({ children }) => {
         users: [],
         numberOfUsers: null,
         currentUserId:null,
-        currentUserEmail: null         
+        currentUserEmail: null,
+        currentUserRole: null,
+        transparent: false        
     }
 
     const [state, dispatch] = useReducer(UserReducer, initialState)

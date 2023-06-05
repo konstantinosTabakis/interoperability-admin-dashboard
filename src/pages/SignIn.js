@@ -38,7 +38,7 @@ function SignIn() {
     }
 
     return (
-        <div className="card sign-in-form">
+        <div className="card sign-in-form modal">
             <h2 className="heading-secondary centered mg-b-small">
                 Sign In
             </h2>

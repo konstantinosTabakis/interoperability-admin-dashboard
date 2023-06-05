@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react"
 import SurveyContext from "../context/SurveyContext"
+import UserContext from "../context/UserContext"
 import { createSurvey, getAllQuestions } from "../db/db-services"
 import { useNavigate } from "react-router-dom"
 
 
 function NewSurvey() {
+    const {currentUserRole} =useContext(UserContext)
     const { questions, dispatch } = useContext(SurveyContext)
     const [availableQuestions, setAvailableQuestions] = useState(questions)
     const [selectedQuestions, setSelectedQuestions] = useState([])
@@ -55,6 +57,14 @@ function NewSurvey() {
             navigate('/surveys')
             // alert('Survey Submited')
         }
+    }
+
+    if(currentUserRole !== 'admin'){
+        return(
+            <div className="newSurvey">
+                Available only for admin members
+            </div>
+        )
     }
 
 

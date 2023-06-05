@@ -1,5 +1,5 @@
 @import 'abstracts/mixins', 'abstracts/variables' , 'abstracts/animations'; 
-@import 'components/navigation', 'components/card' ;
-@import 'pages/home', 'pages/signIn', 'pages/surveys', 'pages/newSurvey';
+@import 'components/navigation', 'components/card', 'components/survey' ;
+@import 'pages/home', 'pages/signIn', 'pages/surveys', 'pages/newSurvey', 'pages/users', 'pages/questions';
 @import 'base/base', 'base/typography', 'base/utilities';
 // @import 'abstracts/mediaQueries'

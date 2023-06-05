@@ -1,4 +1,4 @@
-.navigation{
+.navigation {
     background: $color-gray-menu;
     // background: $color-tertiary;
     width: 30%;
@@ -8,24 +8,27 @@
     border-radius: 0 12px 12px 0;
     // box-shadow: 10px 0 5px -2px #888;
     color: $color-white;
-    .loggedUser{
-        img{
+
+    .loggedUser {
+        img {
             width: 50px;
         }
-        span{
+
+        span {
             display: block;
         }
-        .email{
+
+        .email {
             font-weight: 500;
         }
+
         font-weight: 300;
         font-size: 1.4rem;
         padding-bottom: 2rem;
-        border-bottom: 1px solid  rgba($color-gray-light, .2);
+        border-bottom: 1px solid rgba($color-gray-light, .2);
     }
-    &__menu-item{
+    &__menu-item {
         color: $color-white;
-        // color: $color-gray-dark;
         transition: .6s;
         margin-bottom: 3rem;
         font-weight: 300;
@@ -33,11 +36,18 @@
         display: block;
         cursor: pointer;
         &:hover,
-        &.active{
-            // color: $color-primary;
-            // color: $color-black;
+        &.active {
             font-weight: 600;
         }
-        
+        &.active span{
+            position: relative;
+            &::before{
+                content: '.';
+                font-size: 3rem;
+                line-height: 2rem;
+                position: absolute;
+                left: -15px;
+            }
+        }
     }
 }

@@ -9,11 +9,12 @@ import Surveys from "./pages/Surveys";
 import NewSurvey from "./pages/NewSurvey";
 import Questions from "./pages/Questions";
 import Users from "./pages/Users";
-
-
-
+import Transparent from "./components/Transparent";
+import UserContext from "./context/UserContext";
+import { useContext } from "react";
 
 function App() {
+
   return (
     <UserProvider>
       <SurveyProvider>
@@ -45,12 +46,23 @@ function App() {
   );
 }
 
-const Layout = ({ children }) => (
-  <div className="app__inner">
-    <Menu />
-    {children}
-  </div>
-);
+const Layout = ({ children }) => {
+  const { transparent } = useContext(UserContext)
+
+  return (
+    <div className="app__inner">
+      {transparent && (
+        <Transparent />
+      )}
+      <Menu />
+      {children}
+    </div>
+  )
+
+
+}
+
+
 
 
 

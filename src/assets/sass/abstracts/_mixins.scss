@@ -9,6 +9,8 @@
     min-height: 100vh;
     background: $color-bg-light;
     padding: $padding-default;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 @mixin flex($justify: center,$align: center, $gap: 0){

@@ -1,0 +1,79 @@
+.users{
+    @include outer-container;
+    width: 100%;
+    position: unset;
+
+    &__inner{
+        img{
+            width: 100px;
+        }
+        overflow: auto;
+        &-table{
+            min-width: 950px;
+            // background: pink;
+            @include flex;
+            flex-direction: column;
+            margin: 0 auto;
+            .row{
+                @include flex(space-between, center, 10px);
+                width: 100%;
+                .col{
+                    min-width: 15%;
+                }
+                .col-sm{
+                    @include flex;
+                    // background: red;
+                    width: 50px;
+                    img{
+                        width: 25px;
+                    }
+                    .delete-icon{
+                        width: 20px;
+                        cursor: pointer;
+                    }
+                }
+                .col-bg{
+                    // width: 30%;
+                    width: 320px;
+                }
+    
+                &-header{
+                    font-weight: 700;
+                }
+    
+            }
+        }
+
+    }
+    .addUser{
+        &__inner{
+            background-color: $color-primary;
+            color: $color-white;
+            display: inline;
+            font-size: 4rem;
+            border-radius: 50%;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            border: none;
+            box-shadow: $shadow-secondary;
+        }
+    }
+
+    .modal{
+        .btn-area{
+            text-align: end;
+            button{
+                border: none;
+                background: none;
+                cursor: pointer;
+                img{
+                    width: 25px;
+                }
+            }
+        }
+        label, input , select {
+            display: block;
+        }
+    }
+    
+}
