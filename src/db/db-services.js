@@ -3,6 +3,7 @@ import { db } from "./firebase.config";
 import {
     collection,
     getDocs,
+    writeBatch,
     getDoc,
     addDoc,
     updateDoc,
@@ -45,11 +46,11 @@ export const addUser = async (userData) => {
         const user = userCredential.user
         const created_at = await serverTimestamp()
 
-        const data = { name: userData.name,email: userData.email, role: userData.role, created_at}
+        const data = { name: userData.name, email: userData.email, role: userData.role, created_at }
 
         await setDoc(doc(db, 'users', user.uid), data)
         return data
-    } catch( error){
+    } catch (error) {
         console.log(error);
         alert('User Creation Failed')
     }
@@ -102,8 +103,23 @@ export const getSingleQuestion = async () => {
 
 }
 
-export const createQuestion = async () => {
+export const createQuestions = async (data) => {
+    try {
+        const coll = collection(db, 'questions')
+        const batch = writeBatch(db)
+        const createdQuestionRefs = []
+        for (const question of data) {
+            const docRef = doc(coll)
+            batch.set(docRef, question)
+            createdQuestionRefs.push(docRef)
+        }
+        await batch.commit()
 
+        return true
+    }catch(error){
+        console.log(error)
+        return false
+    }
 }
 
 export const deleteQuestion = async () => {

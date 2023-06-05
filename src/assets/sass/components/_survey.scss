@@ -22,7 +22,7 @@
             }
         }
 
-        &~div {
+        &~.survey__questions {
             max-height: 0;
             overflow: hidden;
             transition: max-height .3s ease-out;
@@ -47,7 +47,7 @@
             }
         }
 
-        &~div {
+        &~.survey__questions {
             max-height: 400px;
             overflow: auto;
             transition: max-height .8s ease-out;            
@@ -56,9 +56,31 @@
     .icon-area{
         background: $color-tertiary;
         position: absolute;
-        right: 3.2rem;
+        right: 3.6rem;
         border-radius: 50%;
         padding: 1rem 1.5rem;
+        img{
+            width: 30px;
+        }
+        span{
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-transform: capitalize;
+            // color: $color-secondary;
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+    }
+    .btn-wrapper{
+        @include flex(unset,center, 25px);
+
+        .btn-download{
+            border: none;
+            cursor: pointer;
+            background: none;
+        }
         img{
             width: 30px;
         }

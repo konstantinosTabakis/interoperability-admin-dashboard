@@ -24,6 +24,12 @@ const SurveyReducer = (state, action) => {
                 questions: action.questions ,
                 numberOfQuestions: action.questions.length
             }
+        case 'CREATE_QUESTIONS':
+            return {
+                ...state,
+                numberOfQuestions: action.questions.length + state.numberOfQuestions,
+                questions: [...state.questions, ...action.questions] 
+            }
         // case 'SET_CURRENT_USER':
         //     return {
         //         ...state,

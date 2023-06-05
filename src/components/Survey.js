@@ -13,11 +13,24 @@ function Survey({ survey }) {
         await deleteSurvey(survey.id)
     }
 
+    const downloadJSON = () => {
+        const json = JSON.stringify(survey);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = survey.name;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
     return (
         <div className='card mg-b-medium survey' key={survey.id}>
             <div className="icon-area">
                 <img src={surveyIcon} alt="" />
-
+                {survey.label && (
+                    <span> {survey.label} </span>
+                )}
             </div>
             <h4 className="heading-secondary mg-b-tiny">
                 {survey.name}
@@ -35,9 +48,20 @@ function Survey({ survey }) {
                     ))}
                 </ol>
             </div>
-            {currentUserRole === 'admin' && (
-                <button className="btn btn-delete mg-t-small" onClick={handleDelete}>Delete Survey</button>
-            )}
+            <div className='btn-wrapper mg-t-small'>
+
+                {currentUserRole === 'admin' && (
+                    <button className="btn btn-delete " onClick={handleDelete}>Delete Survey</button>
+                )}
+
+                <button className='btn-download' onClick={downloadJSON}>
+                    <img src="https://cdn-icons-png.flaticon.com/512/3580/3580085.png" alt="download icon" />
+                </button>
+            </div>
+
+
+
+
         </div>
     )
 }

@@ -3,20 +3,24 @@ import SurveyContext from "../context/SurveyContext"
 import UserContext from "../context/UserContext"
 import { createSurvey, getAllQuestions } from "../db/db-services"
 import { useNavigate } from "react-router-dom"
+import chevronLeft from '../assets/img/chevrons-left.svg'
+import chevronRight from '../assets/img/chevrons-right.svg'
 
 
 function NewSurvey() {
-    const {currentUserRole} =useContext(UserContext)
+    const { currentUserRole } = useContext(UserContext)
     const { questions, dispatch } = useContext(SurveyContext)
     const [availableQuestions, setAvailableQuestions] = useState(questions)
     const [selectedQuestions, setSelectedQuestions] = useState([])
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-    const navigate= useNavigate()
+    const [label, setLabel] = useState('general')
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchQuestions = async () => {
             const questions = await getAllQuestions()
+            setAvailableQuestions(questions)
             dispatch({ type: 'SET_QUESTIONS', questions })
         };
 
@@ -31,7 +35,8 @@ function NewSurvey() {
     }
     const handleDrop = (e) => {
         const id = e.dataTransfer.getData('id')
-        setSelectedQuestions([...selectedQuestions, ...availableQuestions.filter((question) => question.id === id)])
+        console.log(id);
+        setSelectedQuestions([...selectedQuestions, ...availableQuestions.filter((question) => question.id == id)])
         setAvailableQuestions(availableQuestions.filter((question) => question.id != id))
     }
     const handleChange = (e) => {
@@ -39,6 +44,31 @@ function NewSurvey() {
             setName(e.target.value)
         } else if (e.target.id === 'description') {
             setDescription(e.target.value)
+        } else if (e.target.id === 'label') {
+            setLabel(e.target.value)
+        }
+    }
+
+    const handleEmpty = () =>{
+        setAvailableQuestions([...availableQuestions, ...selectedQuestions])
+        setSelectedQuestions([])
+    }
+    const handleFull = () =>{
+        setSelectedQuestions([...availableQuestions, ...selectedQuestions])
+        setAvailableQuestions([])
+    }
+    const handleFilter = (e)=> {
+        const filter= e.target.value
+        if(filter==='all'){
+            setAvailableQuestions(questions)
+        }else if(filter==='legal'){
+            setAvailableQuestions(questions.filter((el)=> el.type.includes('LIMAPS')))
+        }else if(filter==='organisational'){
+            setAvailableQuestions(questions.filter((el)=> el.type.includes('OIMAPS')))
+        }else if(filter==='semantic'){
+            setAvailableQuestions(questions.filter((el)=> el.type.includes('SIMAPS')))
+        }else if(filter==='technical'){
+            setAvailableQuestions(questions.filter((el)=> el.type.includes('TIMAPS')))
         }
     }
 
@@ -49,6 +79,7 @@ function NewSurvey() {
             const newSurvey = {
                 name,
                 description,
+                label,
                 questions: selectedQuestions
             }
             console.log('new Survey:', newSurvey);
@@ -59,8 +90,8 @@ function NewSurvey() {
         }
     }
 
-    if(currentUserRole !== 'admin'){
-        return(
+    if (currentUserRole !== 'admin') {
+        return (
             <div className="newSurvey">
                 Available only for admin members
             </div>
@@ -75,30 +106,67 @@ function NewSurvey() {
                 <label htmlFor="name" className="mg-b-tiny">Name</label>
                 <input value={name} type="text" id="name" placeholder='Name of the Survey' className="input-basic mg-b-small" onChange={handleChange} />
                 <label htmlFor="description" className="mg-b-tiny">Description</label>
-                <textarea value={description} id="description" className="input-basic" placeholder='Description of Survey' onChange={handleChange}></textarea>
-                {/* <label htmlFor="name" className="mg-b-tiny">Name</label>
-                <input type="text" id="name" placeholder='Name of the Survey' className="input-basic mg-b-small" /> */}
+                <textarea value={description} id="description" className="input-basic mg-b-small" placeholder='Description of Survey' onChange={handleChange}></textarea>
+                <label htmlFor="label" className="mg-b-tiny">Label</label>
+                <select id="label" className="input-basic mg-b-small" onChange={handleChange}>
+                    <option value="general">General</option>
+                    <option value="legal">Legal</option>
+                    <option value="organisational">Organisational</option>
+                    <option value="semantic">Semantic</option>
+                    <option value="technical">Technical</option>
+                </select>
             </div>
+
             <div className="newSurvey__questions">
                 <div className="newSurvey__questions-available ">
-                    <h4 className="heading-secondary">Available questions</h4>
-                    <div className="questions-inner">
-                        {availableQuestions.map((el) => (
-                            <div className="card card-small mg-b-tiny" key={el.id} draggable onDragStart={() => handleDrag(el.id, event)} >
-                                {el.question}
-                            </div>
-                        ))}
+                    <h4 className="heading-secondary mg-b-small">Available questions</h4>
+
+                    <div className="questions-container">
+                        <h5 className="questions-heading">
+                            <span>Total: {availableQuestions.length}</span>
+                            <span>
+                                <select id="" className="input-basic" onChange={handleFilter}>
+                                    <option value="all">All</option>
+                                    <option value="legal">Legal</option>
+                                    <option value="organisational">Organisational</option>
+                                    <option value="semantic">Semantic</option>
+                                    <option value="technical">Technical</option>
+                                </select>
+                            </span>
+                        </h5>
+                        <div className="questions-inner">
+                            {availableQuestions.map((el, index) => (
+                                <div className="card card-small mg-b-tiny" key={index} draggable onDragStart={() => handleDrag(el.id, event)} >
+                                    {el.question}
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
-                <div className="newSurvey__questions-selected">
-                    <h4 className="heading-secondary">Selected questions</h4>
-                    <div className="questions-inner" onDragOver={handleDragOver} onDrop={handleDrop}   >
-                        {selectedQuestions.map((el) => (
-                            <div className="card card-small mg-b-tiny" key={el.id}>
-                                {el.question}
-                            </div>
-                        ))}
+                <div className="newSurvey__questions-selected"  >
+                    <h4 className="heading-secondary mg-b-small">Selected questions</h4>
+
+                    <div className="questions-container"  >
+                        <h5 className="questions-heading">
+                            <span>Total: {selectedQuestions.length}</span>
+                            <span className="icons">
+                                <button>
+                                    <img src={chevronLeft} alt="chevron left icon" onClick={handleEmpty} />
+                                </button>
+                                <button>
+                                    <img src={chevronRight} alt="chevron right icon" onClick={handleFull} />
+                                </button>
+                            </span>
+                        </h5>
+                        <div className="questions-inner" onDragOver={handleDragOver} onDrop={handleDrop}>
+                            {selectedQuestions.map((el, index) => (
+                                <div className="card card-small mg-b-tiny" key={index}>
+                                    {el.question}
+                                </div>
+                            ))}
+                        </div>
                     </div>
+
                 </div>
             </div>
             <div className="btn-area centered mg-t-medium">
