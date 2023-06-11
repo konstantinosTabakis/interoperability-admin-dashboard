@@ -5,12 +5,12 @@ import evaluationIcon from '../assets/img/evaluation.png'
 import questionIcon from '../assets/img/questions.png'
 
 
-function Overview({ users, surveys, questions }) {
+function Overview({ users, surveys, questions,evaluations }) {
 
   const chartData = {
     labels: ['Users', 'Surveys','Evaluations', 'Questions'],
     datasets: [{
-      data: [users, surveys,0, questions],
+      data: [users, surveys,evaluations , questions],
       backgroundColor: ['#e2dddb', '#DBA39A','#d26060' ,'#eac9c9'],
       // barThickness: 120,  // number (pixels) or 'flex'
                 maxBarThickness: 120
@@ -50,7 +50,7 @@ function Overview({ users, surveys, questions }) {
           </div>
           <div>
             Evaluations:
-            <span> 0  </span>
+            <span> {evaluations}  </span>
           </div>
         </div>
         <div className="card__inner-item">

@@ -6,7 +6,6 @@ import {
     writeBatch,
     getDoc,
     addDoc,
-    updateDoc,
     deleteDoc,
     doc,
     setDoc,
@@ -124,4 +123,17 @@ export const createQuestions = async (data) => {
 
 export const deleteQuestion = async () => {
 
+}
+
+//Evaluations
+export const getEvaluationsNumber = async () => {
+    const coll = collection(db, 'evaluations');
+    const querySnapshot = await getDocs(coll);
+
+    const evaluations = querySnapshot.docs.map((doc) => {
+        const evaluationData = doc.data()
+        const evaluationId = doc.id
+        return { id: evaluationId, ...evaluationData }
+    });
+    return evaluations;
 }

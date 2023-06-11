@@ -9,7 +9,8 @@ export const SurveyProvider = ({ children }) => {
         surveys: [],
         numberOfSurveys: null,
         questions:[],
-        numberOfQuestions: null         
+        numberOfQuestions: null,
+        numberOfEvaluations: null        
     }
 
     const [state, dispatch] = useReducer(SurveyReducer, initialState)
