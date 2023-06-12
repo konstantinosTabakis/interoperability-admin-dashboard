@@ -2,6 +2,7 @@ import { useState, useRef, useContext } from "react";
 import { createQuestions } from "../db/db-services"
 import  SurveyContext from '../context/SurveyContext'
 import { useNavigate } from "react-router-dom";
+import FormatedJSON from "../components/FormatedJSON";
 function Questions() {
 
 
@@ -55,6 +56,11 @@ function Questions() {
                 Questions
             </h2>
             <p className="mg-b-medium">Import new questions to use on surveys. Supported format is Json.</p>
+            <h3 className="heading-secondary mg-b-small">Example Format:</h3>
+            <div className="mg-b-medium">
+                <FormatedJSON/>
+            </div>
+            <h3 className="heading-secondary mg-b-small">Import File:</h3>
             <input type="file" id="json" className="file-input" accept=".json" onChange={handleFileChange} ref={fileInputRef} />
             <label htmlFor="json" className="drop-container" onDragOver={handleDragOver} onDrop={handleDrop}>
                 <span className="drop-title">Drop files here</span>

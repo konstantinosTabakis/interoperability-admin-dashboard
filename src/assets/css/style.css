@@ -131,6 +131,14 @@
     .survey .btn-wrapper img {
       width: 30px; }
 
+.wrapper__json {
+  max-width: 100%;
+  background: #5a4c4c;
+  color: #fff; }
+  .wrapper__json-inner {
+    overflow: auto;
+    max-height: 400px; }
+
 .home {
   position: relative;
   min-height: 100vh;

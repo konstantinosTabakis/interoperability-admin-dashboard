@@ -1,0 +1,11 @@
+.wrapper__json{
+    max-width: 100%;
+    background: $color-gray-menu;
+    color: $color-white;
+
+    &-inner{
+        overflow: auto;
+        max-height: 400px;
+    }
+
+}

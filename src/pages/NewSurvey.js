@@ -49,26 +49,26 @@ function NewSurvey() {
         }
     }
 
-    const handleEmpty = () =>{
+    const handleEmpty = () => {
         setAvailableQuestions([...availableQuestions, ...selectedQuestions])
         setSelectedQuestions([])
     }
-    const handleFull = () =>{
+    const handleFull = () => {
         setSelectedQuestions([...availableQuestions, ...selectedQuestions])
         setAvailableQuestions([])
     }
-    const handleFilter = (e)=> {
-        const filter= e.target.value
-        if(filter==='all'){
+    const handleFilter = (e) => {
+        const filter = e.target.value
+        if (filter === 'all') {
             setAvailableQuestions(questions)
-        }else if(filter==='legal'){
-            setAvailableQuestions(questions.filter((el)=> el.type.includes('LIMAPS')))
-        }else if(filter==='organisational'){
-            setAvailableQuestions(questions.filter((el)=> el.type.includes('OIMAPS')))
-        }else if(filter==='semantic'){
-            setAvailableQuestions(questions.filter((el)=> el.type.includes('SIMAPS')))
-        }else if(filter==='technical'){
-            setAvailableQuestions(questions.filter((el)=> el.type.includes('TIMAPS')))
+        } else if (filter === 'legal') {
+            setAvailableQuestions(questions.filter((el) => el.type.includes('LIMAPS')))
+        } else if (filter === 'organisational') {
+            setAvailableQuestions(questions.filter((el) => el.type.includes('OIMAPS')))
+        } else if (filter === 'semantic') {
+            setAvailableQuestions(questions.filter((el) => el.type.includes('SIMAPS')))
+        } else if (filter === 'technical') {
+            setAvailableQuestions(questions.filter((el) => el.type.includes('TIMAPS')))
         }
     }
 
@@ -103,18 +103,20 @@ function NewSurvey() {
         <section className='newSurvey'>
             <h4 className="heading-primary mg-b-medium centered">New Survey</h4>
             <div className="card mg-b-medium newSurvey__data mx-auto ">
-                <label htmlFor="name" className="mg-b-tiny">Name</label>
-                <input value={name} type="text" id="name" placeholder='Name of the Survey' className="input-basic mg-b-small" onChange={handleChange} />
-                <label htmlFor="description" className="mg-b-tiny">Description</label>
-                <textarea value={description} id="description" className="input-basic mg-b-small" placeholder='Description of Survey' onChange={handleChange}></textarea>
-                <label htmlFor="label" className="mg-b-tiny">Label</label>
-                <select id="label" className="input-basic mg-b-small" onChange={handleChange}>
-                    <option value="general">General</option>
-                    <option value="legal">Legal</option>
-                    <option value="organisational">Organisational</option>
-                    <option value="semantic">Semantic</option>
-                    <option value="technical">Technical</option>
-                </select>
+                <div className="newSurvey__data-inner">
+                    <label htmlFor="name" className="mg-b-tiny">Name</label>
+                    <input value={name} type="text" id="name" placeholder='Name of the Survey' className="input-basic mg-b-small" onChange={handleChange} />
+                    <label htmlFor="description" className="mg-b-tiny">Description</label>
+                    <textarea value={description} id="description" className="input-basic mg-b-small" placeholder='Description of Survey' onChange={handleChange}></textarea>
+                    <label htmlFor="label" className="mg-b-tiny">Label</label>
+                    <select id="label" className="input-basic mg-b-small" onChange={handleChange}>
+                        <option value="general">General</option>
+                        <option value="legal">Legal</option>
+                        <option value="organisational">Organisational</option>
+                        <option value="semantic">Semantic</option>
+                        <option value="technical">Technical</option>
+                    </select>
+                </div>
             </div>
 
             <div className="newSurvey__questions">
