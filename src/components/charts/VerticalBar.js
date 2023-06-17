@@ -25,12 +25,7 @@ const options =
         legend: {
             display: false
         },  
-        // labels: {
-        //     render: 'label',
-        //     fontColor: '#3b3b3b',
-        //     fontSize: 18,
-        //     fontStyle: 'bold'
-        //   }
+         
     },
     scales: {
         x: {
@@ -38,10 +33,10 @@ const options =
             display: true
           },
           ticks: {
-            color: '#3b3b3b', // Customize the label font color
+            color: '#3b3b3b',  
             font: {
-              size: 14, // Customize the label font size
-              weight: 'bold' // Customize the label font weight
+              size: 14,  
+              weight: 'bold'  
             }
           }
         },

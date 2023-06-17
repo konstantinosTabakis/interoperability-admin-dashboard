@@ -8,10 +8,12 @@ import { SurveyProvider } from "./context/SurveyContext";
 import Surveys from "./pages/Surveys";
 import NewSurvey from "./pages/NewSurvey";
 import Questions from "./pages/Questions";
+import Evaluations from "./pages/Evaluations";
 import Users from "./pages/Users";
 import Transparent from "./components/Transparent";
 import UserContext from "./context/UserContext";
 import { useContext } from "react";
+import CurrentUser from "./components/CurrentUser";
 
 function App() {
 
@@ -23,6 +25,9 @@ function App() {
             <Routes>
               <Route path="/" element={<PrivateRoute />} >
                 <Route path="/" element={<Layout><Home /></Layout>} />
+              </Route>
+              <Route path="/evaluations" element={<PrivateRoute />} >
+                <Route path="/evaluations" element={<Layout><Evaluations /></Layout>} />
               </Route>
               <Route path="/surveys" element={<PrivateRoute />} >
                 <Route path="/surveys" element={<Layout><Surveys /></Layout>} />
@@ -55,7 +60,10 @@ const Layout = ({ children }) => {
         <Transparent />
       )}
       <Menu />
-      {children}
+      <div className="app__inner-content">
+        <CurrentUser/>
+        {children}
+      </div>
     </div>
   )
 

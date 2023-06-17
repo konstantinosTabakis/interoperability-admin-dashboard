@@ -33,7 +33,8 @@ const SurveyReducer = (state, action) => {
         case 'SET_EVALUATIONS':
             return {
                 ...state,
-                numberOfEvaluations: action.evaluations
+                evaluations: action.evaluations,
+                numberOfEvaluations: action.evaluations.length
             }
         // case 'SET_CURRENT_USER':
         //     return {

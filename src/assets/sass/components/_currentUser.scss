@@ -1,0 +1,25 @@
+.current-user{
+    position: fixed;
+    z-index: 1;
+    right: $padding-default;
+    top: $padding-default;
+    img{
+        width: 50px;
+        cursor: pointer;
+    }
+
+    .drop-down-menu{
+        position: absolute;
+        left: -320px;
+        width: 350px;
+        text-align: center;
+        font-size: 1.4rem;
+
+        button{
+            cursor: pointer;
+            padding: 1rem;
+            font-size: 1.4rem;
+            // background: $color-red-warning;
+        }
+    }
+}

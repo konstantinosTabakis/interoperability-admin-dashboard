@@ -24,5 +24,8 @@ textarea{
         width: 100%;
         @include flex(unset,unset,5px);
         position: relative;
+        &-content{
+            width: 100%;
+        }
     }
 }
