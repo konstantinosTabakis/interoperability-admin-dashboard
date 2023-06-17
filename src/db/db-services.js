@@ -132,8 +132,11 @@ export const getEvaluationsNumber = async () => {
 
     const evaluations = querySnapshot.docs.map((doc) => {
         const evaluationData = doc.data()
+        const date = new Date(evaluationData.created_at.seconds * 1000);
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
         const evaluationId = doc.id
-        return { id: evaluationId, ...evaluationData }
+        return { id: evaluationId, ...evaluationData, month,year }
     });
     return evaluations;
 }
