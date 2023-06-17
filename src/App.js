@@ -13,6 +13,7 @@ import Users from "./pages/Users";
 import Transparent from "./components/Transparent";
 import UserContext from "./context/UserContext";
 import { useContext } from "react";
+import CurrentUser from "./components/CurrentUser";
 
 function App() {
 
@@ -59,7 +60,10 @@ const Layout = ({ children }) => {
         <Transparent />
       )}
       <Menu />
-      {children}
+      <div className="app__inner-content">
+        <CurrentUser/>
+        {children}
+      </div>
     </div>
   )
 

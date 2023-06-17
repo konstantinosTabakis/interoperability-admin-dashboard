@@ -139,6 +139,25 @@
     overflow: auto;
     max-height: 400px; }
 
+.current-user {
+  position: fixed;
+  z-index: 1;
+  right: 3.2rem;
+  top: 3.2rem; }
+  .current-user img {
+    width: 50px;
+    cursor: pointer; }
+  .current-user .drop-down-menu {
+    position: absolute;
+    left: -320px;
+    width: 350px;
+    text-align: center;
+    font-size: 1.4rem; }
+    .current-user .drop-down-menu button {
+      cursor: pointer;
+      padding: 1rem;
+      font-size: 1.4rem; }
+
 .home {
   position: relative;
   min-height: 100vh;
@@ -372,6 +391,8 @@ textarea {
   justify-content: unset;
   gap: 5px;
   position: relative; }
+  .app__inner-content {
+    width: 100%; }
 
 @font-face {
   font-family: montserrat;

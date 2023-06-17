@@ -1,4 +1,4 @@
-import {  signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from '../db/firebase.config';
@@ -14,39 +14,42 @@ function SignIn() {
 
     const onChange = (e) => {
         setFormData((prevState) => ({
-          ...prevState,
-          [e.target.id]: e.target.value,
+            ...prevState,
+            [e.target.id]: e.target.value,
         }))
-      }
+    }
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
         try {
-      
+
             const userCredential = await signInWithEmailAndPassword(
-              auth,
-              email,
-              password
+                auth,
+                email,
+                password
             )
-      
+
             if (userCredential.user) {
-                  navigate('/')
+                navigate('/')
             }
         } catch (error) {
-                console.log('Bad User Credentials')
-                alert('NOOO')
-          }
+            console.log('Bad User Credentials')
+            alert('Wrong Credentials')
+        }
     }
 
     return (
         <div className="card sign-in-form modal">
-            <h2 className="heading-secondary centered mg-b-small">
-                Sign In
-            </h2>
-            <label htmlFor="email">Email</label>
-            <input className='w-100 mg-b-small' type="email" id="email" placeholder='Type your email' onChange={onChange} value={email} />
-            <label htmlFor="password">Password</label>
-            <input className='w-100 mg-b-medium' type="password" id="password" placeholder='Type your password' onChange={onChange} value={password}/>
-            <button className='btn btn-primary w-100' onClick={handleSubmit}>Submit</button>
+            <form onSubmit={handleSubmit}>
+                <h2 className="heading-secondary centered mg-b-small">
+                    Sign In
+                </h2>
+                <label htmlFor="email">Email</label>
+                <input className='w-100 mg-b-small' type="email" id="email" placeholder='Type your email' onChange={onChange} value={email} />
+                <label htmlFor="password">Password</label>
+                <input className='w-100 mg-b-medium' type="password" id="password" placeholder='Type your password' onChange={onChange} value={password} />
+                <button type='submit' className='btn btn-primary w-100'  >Submit</button>
+            </form>
         </div>
     )
 }
