@@ -30,7 +30,6 @@ function Home() {
 
     const fetchEvaluations = async () => {
       const evaluations = await getEvaluationsNumber()
-      console.log('evaluations: ', evaluations);
       surveyDispatch({ type: 'SET_EVALUATIONS', evaluations: evaluations })
     };
 

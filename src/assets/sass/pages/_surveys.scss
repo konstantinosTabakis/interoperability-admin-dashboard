@@ -1,4 +1,13 @@
 .surveys{
     @include outer-container;
     width: 100%;
+
+    .modal{
+        p{
+            font-size: 1.8rem;
+        }
+        .deleteIcon{
+            width: 60px;
+        }
+    }
 }

@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react"
 import UserContext from "../context/UserContext"
-import deleteIcon from '../assets/img/delete.png'
 import UserModal from "../components/UserModal"
 import { getAllUsers } from "../db/db-services"
 import { motion, AnimatePresence } from 'framer-motion'

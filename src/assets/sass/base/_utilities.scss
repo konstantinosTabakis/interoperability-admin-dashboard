@@ -29,6 +29,10 @@
     color: $color-primary;
     background: $color-bg-light;
 }
+.double-btns{
+    @include flex(unset, unset, 20px);
+    flex-wrap: wrap;
+}
 
 .centered {
     text-align: center;
@@ -76,9 +80,22 @@
 
 .modal{
     @include absolute-center;
+    position: fixed;
     width: 95%;
     max-width: 500px;
     z-index: 100;
+
+    .btn-area{
+        text-align: end;
+        button{
+            border: none;
+            background: none;
+            cursor: pointer;
+            img{
+                width: 25px;
+            }
+        }
+    }
 }
 
 .mx-auto {

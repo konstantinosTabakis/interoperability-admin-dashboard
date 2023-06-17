@@ -22,7 +22,7 @@ function UserModal({ handleCreate }) {
 
     const closeModal = () => {
         handleCreate();
-      };
+    };
 
     const handleChange = (e) => {
         setFormData((prevState) => ({

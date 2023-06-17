@@ -3,23 +3,11 @@ import LineChart from "../components/charts/LineChart"
 import SurveyContext from "../context/SurveyContext";
 import { getEvaluationsNumber, getAllSurveys } from "../db/db-services";
 import EvaluationStats from "../components/EvaluationStats";
-
-// const lineChartData = {
-//     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-//     datasets: [
-//         {
-//             label: 'Data',
-//             data: [10, 15, 7, 12, 90, 11],
-//             borderColor: '#DBA39A',
-//             tension: 0.5
-//         }
-//     ]
-// }
-
+import EvaluationReport from "../components/EvaluationReport";
 
 function Evaluations() {
 
-    const [chartData,setChartData]= useState(
+    const [chartData, setChartData] = useState(
         {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             datasets: [
@@ -55,41 +43,42 @@ function Evaluations() {
     const handleFilter = (evaluations) => {
         const filteredEvaluations = evaluations.filter(item => {
             if (survey && item.survey !== survey) {
-                return false  
+                return false
             }
             if (type && item.surveyLabel !== type) {
-                return false  
+                return false
             }
             if (year && item.year != filters.year) {
-                return false 
+                return false
             }
-            return true  
+            return true
         });
-        console.log(filteredEvaluations);
         return filteredEvaluations
     }
 
 
     const updateChartData = (data) => {
-        const aggregatedData = new Array(12).fill(0);  
-      
-         
+        const aggregatedData = new Array(12).fill(0);
+
+
         data.forEach(item => {
-          const month = item.month;
-          if (month >= 1 && month <= 12) {
-            aggregatedData[month - 1] += 1;  
-          }
+            const month = item.month;
+            if (month >= 1 && month <= 12) {
+                aggregatedData[month - 1] += 1;
+            }
         });
-      
-         
+
+
         setChartData(prevState => ({
-          ...prevState,
-          datasets: prevState.datasets.map(dataset => ({
-            ...dataset,
-            data: aggregatedData
-          }))
+            ...prevState,
+            datasets: prevState.datasets.map(dataset => ({
+                ...dataset,
+                data: aggregatedData
+            }))
         }));
-      };
+    };
+
+    
 
     useEffect(() => {
         const fetchEvaluations = async () => {
@@ -108,7 +97,7 @@ function Evaluations() {
         if (surveys.length === 0) fetchSurveys()
         if (!numberOfEvaluations) {
             fetchEvaluations()
-        }else{
+        } else {
             setFilteredData(evaluations)
             updateChartData(evaluations)
         }
@@ -119,7 +108,7 @@ function Evaluations() {
         if (initialLoad) {
             setInitialLoad(false);
         } else {
-            const filtered= handleFilter(evaluations)
+            const filtered = handleFilter(evaluations)
             setFilteredData(filtered);
             updateChartData(filtered)
         }
@@ -164,9 +153,11 @@ function Evaluations() {
 
                 </div>
                 <EvaluationStats numberOfEvaluations={filteredData.length} evaluations={filteredData} />
-                <div className="chart" style={{ minHeight: '300px' }}>
+                <div className="chart mg-b-big" style={{ minHeight: '300px' }}>
                     <LineChart data={chartData} />
                 </div>
+                <EvaluationReport  evaluations={filteredData}/>
+                
 
             </div>
         </div>
