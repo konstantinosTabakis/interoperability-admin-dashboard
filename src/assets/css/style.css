@@ -363,6 +363,31 @@
   max-width: 1400px;
   margin: 0 auto;
   width: 100%; }
+  .evaluations__filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+    padding-bottom: 3.2rem;
+    border-bottom: 2px solid rgba(215, 215, 215, 0.375); }
+    .evaluations__filters .item label {
+      display: block;
+      margin-bottom: 4px;
+      text-align: center;
+      font-weight: 600; }
+    .evaluations__filters .item select {
+      min-width: 240px; }
+  .evaluations__stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px; }
+    .evaluations__stats .card {
+      background-color: #FEFCF3;
+      min-width: 120px; }
+      .evaluations__stats .card .value {
+        font-weight: 600;
+        font-size: 2.4rem; }
 
 *,
 *::after,
