@@ -8,6 +8,7 @@ import { SurveyProvider } from "./context/SurveyContext";
 import Surveys from "./pages/Surveys";
 import NewSurvey from "./pages/NewSurvey";
 import Questions from "./pages/Questions";
+import Evaluations from "./pages/Evaluations";
 import Users from "./pages/Users";
 import Transparent from "./components/Transparent";
 import UserContext from "./context/UserContext";
@@ -23,6 +24,9 @@ function App() {
             <Routes>
               <Route path="/" element={<PrivateRoute />} >
                 <Route path="/" element={<Layout><Home /></Layout>} />
+              </Route>
+              <Route path="/evaluations" element={<PrivateRoute />} >
+                <Route path="/evaluations" element={<Layout><Evaluations /></Layout>} />
               </Route>
               <Route path="/surveys" element={<PrivateRoute />} >
                 <Route path="/surveys" element={<Layout><Surveys /></Layout>} />

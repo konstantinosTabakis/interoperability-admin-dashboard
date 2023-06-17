@@ -27,9 +27,11 @@ function Home() {
       const questions = await getAllQuestions()
       surveyDispatch({ type: 'SET_QUESTIONS', questions })
     };
+
     const fetchEvaluations = async () => {
       const evaluations = await getEvaluationsNumber()
-      surveyDispatch({ type: 'SET_EVALUATIONS', evaluations: evaluations.length })
+      console.log('evaluations: ', evaluations);
+      surveyDispatch({ type: 'SET_EVALUATIONS', evaluations: evaluations })
     };
 
     if (users.length ===0) fetchUsers()

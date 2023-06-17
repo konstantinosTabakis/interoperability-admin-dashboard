@@ -10,6 +10,7 @@ export const SurveyProvider = ({ children }) => {
         numberOfSurveys: null,
         questions:[],
         numberOfQuestions: null,
+        evaluations: [],
         numberOfEvaluations: null        
     }
 
