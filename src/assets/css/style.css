@@ -193,6 +193,10 @@
   max-width: 1400px;
   margin: 0 auto;
   width: 100%; }
+  .surveys .modal p {
+    font-size: 1.8rem; }
+  .surveys .modal .deleteIcon {
+    width: 60px; }
 
 .newSurvey {
   position: relative;
@@ -300,14 +304,6 @@
     cursor: pointer;
     border: none;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); }
-  .users .modal .btn-area {
-    text-align: end; }
-    .users .modal .btn-area button {
-      border: none;
-      background: none;
-      cursor: pointer; }
-      .users .modal .btn-area button img {
-        width: 25px; }
   .users .modal label, .users .modal input, .users .modal select {
     display: block; }
 
@@ -441,6 +437,9 @@ body {
   font-size: 2.4rem;
   font-weight: 500; }
 
+.bold {
+  font-weight: 700; }
+
 .btn {
   cursor: pointer;
   padding: 1.6rem 4.6rem;
@@ -467,6 +466,13 @@ body {
   border: 1px solid #DBA39A;
   color: #DBA39A;
   background: #FEFCF3; }
+
+.double-btns {
+  display: flex;
+  align-items: unset;
+  justify-content: unset;
+  gap: 20px;
+  flex-wrap: wrap; }
 
 .centered {
   text-align: center; }
@@ -510,9 +516,18 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  position: fixed;
   width: 95%;
   max-width: 500px;
   z-index: 100; }
+  .modal .btn-area {
+    text-align: end; }
+    .modal .btn-area button {
+      border: none;
+      background: none;
+      cursor: pointer; }
+      .modal .btn-area button img {
+        width: 25px; }
 
 .mx-auto {
   margin-left: auto;
