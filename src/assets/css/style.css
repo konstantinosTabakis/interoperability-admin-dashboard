@@ -385,6 +385,20 @@
         font-weight: 600;
         font-size: 2.4rem; }
 
+.about {
+  position: relative;
+  min-height: 100vh;
+  background: #FEFCF3;
+  padding: 3.2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%; }
+  .about .logo {
+    width: 70px; }
+  .about a {
+    color: #DBA39A;
+    font-weight: 600; }
+
 *,
 *::after,
 *::before {

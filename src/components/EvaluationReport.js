@@ -1,4 +1,4 @@
-import { saveAs } from 'file-saver';
+import { jsonWriter, csvWriter } from '../utils/writers';
 
 function EvaluationReport({ evaluations }) {
 
@@ -30,28 +30,11 @@ function EvaluationReport({ evaluations }) {
     }
 
     const handlePrintJson = () => {
-        const json = JSON.stringify(handleData());
-        const blob = new Blob([json], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `interoperability_report${calcDate()}`;
-        a.click();
-        URL.revokeObjectURL(url);
+        jsonWriter(handleData(),`interoperability_report${calcDate()}` )
     }
 
     const handlePrintCsv = () => {
-        const data = handleData();
-        const headers = Object.keys(data[0]);
-        const rows = data.map(obj => headers.map(header => obj[header]));
-
-        let csv = headers.join(",") + "\n";
-        csv += rows.map(row => row.join(",")).join("\n");
-
-        var BOM = "\uFEFF";
-        csv = BOM + csv;
-        var blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-        saveAs(blob, `interoperability_report${calcDate()}.csv`);
+        csvWriter(handleData(), `interoperability_report${calcDate()}.csv`)
     }
 
     return (
