@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes, Outlet } from "react-router-dom"
 import Home from "./pages/Home";
-import Menu from "./components/Menu";
+import Menu from "./components/layout/Menu";
 import SignIn from "./pages/SignIn";
 import PrivateRoute from "./components/PrivateRoute";
 import { UserProvider } from "./context/UserContext";
@@ -14,6 +14,7 @@ import Transparent from "./components/Transparent";
 import UserContext from "./context/UserContext";
 import { useContext } from "react";
 import CurrentUser from "./components/CurrentUser";
+import About from "./pages/About";
 
 function App() {
 
@@ -40,6 +41,9 @@ function App() {
               </Route>
               <Route path="/users" element={<PrivateRoute />} >
                 <Route path="/users" element={<Layout><Users /></Layout>} />
+              </Route>
+              <Route path="/about" element={<PrivateRoute />} >
+                <Route path="/about" element={<Layout><About /></Layout>} />
               </Route>
               <Route path="/signIn" element={<SignIn />} />
             </Routes>

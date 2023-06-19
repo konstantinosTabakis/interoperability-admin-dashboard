@@ -1,0 +1,11 @@
+.about{
+    @include outer-container;
+    width: 100%;
+    .logo{
+        width: 70px;
+    }
+    a{
+        color: $color-primary;
+        font-weight: 600;
+    }
+}

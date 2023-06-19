@@ -16,6 +16,7 @@ function Menu() {
                     <li><NavLink className="navigation__menu-item" to='/newSurvey'> <span>New Survey</span> </NavLink></li>
                     <li><NavLink className="navigation__menu-item" to='/questions'>Questions</NavLink></li>
                     <li><NavLink className="navigation__menu-item" to='/users'> <span>Users</span> </NavLink></li>
+                    <li><NavLink className="navigation__menu-item" to='/about'> <span>About</span> </NavLink></li>
                 </ul>
 
             </div>
