@@ -30,7 +30,6 @@ function ImportJSON() {
     const handleFileRead = async (event) => {
         const content = event.target.result
         const jsonData = JSON.parse(content)
-        console.log(jsonData)
         const response = await createQuestions(jsonData)
         if (response) {
             dispatch({ type: 'CREATE_QUESTIONS', questions: jsonData })

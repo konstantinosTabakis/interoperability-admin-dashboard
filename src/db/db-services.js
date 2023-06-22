@@ -9,7 +9,6 @@ import {
     deleteDoc,
     doc,
     setDoc,
-    getCountFromServer,
     serverTimestamp
 } from "firebase/firestore";
 
@@ -51,7 +50,6 @@ export const addUser = async (userData) => {
         return data
     } catch (error) {
         console.log(error);
-        alert('User Creation Failed')
     }
 
 }
@@ -76,7 +74,9 @@ export const getSingleSurvey = async () => {
 
 export const createSurvey = async (newSurvey) => {
     const coll = collection(db, 'surveys');
-    return await addDoc(coll, newSurvey);
+    const docRef = await addDoc(coll, newSurvey);
+    const surveyId = docRef.id;
+    return surveyId;
 }
 
 export const deleteSurvey = async (id) => {

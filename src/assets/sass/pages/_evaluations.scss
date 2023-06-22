@@ -1,32 +1,45 @@
-.evaluations{
+.evaluations {
     @include outer-container;
     width: 100%;
 
-    &__filters{
+    .heading-secondary {
+        font-size: 2rem;
+        color: $color-primary;
+    }
+
+    &__filters {
         @include flex(space-around, center, 10px);
         padding-bottom: 3.2rem;
-        border-bottom: 2px solid rgba(215, 215, 215, 0.375);
-        .item{
-            label{
+
+        .item {
+            label {
                 display: block;
                 margin-bottom: 4px;
                 text-align: center;
                 font-weight: 600;
             }
-            select{
-                min-width: 240px
+
+            select {
+                min-width: 240px;
             }
+        }
+        &-wrapper{
+            // background: red;
+            border-bottom: 2px solid rgba(214, 214, 214, 0.384);
         }
 
     }
 
-    &__stats{
+
+    &__stats {
         @include flex(space-around, center, 10px);
-        .card{
+
+        .card {
             background-color: $color-bg-light;
             min-width: 120px;
+
             // font-size: 2rem;
-            .value{
+            .value {
                 font-weight: 600;
                 font-size: 2.4rem;
             }
