@@ -4,6 +4,7 @@ import { addUser } from '../db/db-services'
 import UserContext from '../context/UserContext'
 import { auth } from '../db/firebase.config'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 
 function UserModal({ handleCreate }) {
@@ -34,12 +35,18 @@ function UserModal({ handleCreate }) {
     const handleSubmit = async (e) =>{
         e.preventDefault()
         if(email =='' || name== ''|| password== '' || confirmPassword == ''){
-            alert('Please fill out all fields')
+            toast.error('Please fill out all fields', {
+                position: toast.POSITION.TOP_CENTER
+            })
         }else if(password != confirmPassword){
-            alert('Confirm Password')
+            toast.error('Password and confirm password do not match', {
+                position: toast.POSITION.TOP_CENTER
+            })
         }else{
             const data= await addUser(formData)
-            console.log(data);
+            toast.success('The new user was created', {
+                position: toast.POSITION.TOP_CENTER
+            })
             dispatch({ type: 'ADD_USER', user: data })
             dispatch({type: 'DELETE_CURRENT_USER'})
             auth.signOut()

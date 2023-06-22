@@ -2,7 +2,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from '../db/firebase.config';
-
+import { toast } from 'react-toastify'
 
 function SignIn() {
     const [formData, setFormData] = useState({
@@ -33,8 +33,9 @@ function SignIn() {
                 navigate('/')
             }
         } catch (error) {
-            console.log('Bad User Credentials')
-            alert('Wrong Credentials')
+            toast.error('Wrong credentials', {
+                position: toast.POSITION.TOP_CENTER
+            })
         }
     }
 

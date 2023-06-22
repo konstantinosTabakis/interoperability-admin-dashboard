@@ -26,7 +26,7 @@ function Surveys() {
             <div>
                 <AnimatePresence>
                     {surveys.map((el) => (
-                        <motion.div  key={el.id}
+                        <motion.div  key={el.name}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }} >

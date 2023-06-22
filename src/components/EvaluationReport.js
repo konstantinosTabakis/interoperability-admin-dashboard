@@ -20,6 +20,12 @@ function EvaluationReport({ evaluations }) {
         const printData = evaluations.map((el) => {
             return {
                 id: el.id,
+                service_name: el.identification?.name ? el.identification.name : null,
+                service_email: el.identification?.email ? el.identification.email : null,
+                service_sector: el.identification?.sector ? el.identification.sector : null,
+                service_target: el.identification?.target ? el.identification.target : null,
+                service_admin_level: el.identification?.admin_level ? el.identification.admin_level : null,
+                user_role: el.identification?.role ? el.identification.role : null,
                 survey: el.survey,
                 label: el.surveyLabel,
                 percentage: el.percentage,

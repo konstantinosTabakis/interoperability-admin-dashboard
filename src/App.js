@@ -1,4 +1,6 @@
-import { BrowserRouter as Router, Route, Routes, Outlet } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 import Home from "./pages/Home";
 import Menu from "./components/layout/Menu";
 import SignIn from "./pages/SignIn";
@@ -21,6 +23,7 @@ function App() {
   return (
     <UserProvider>
       <SurveyProvider>
+        <ToastContainer />
         <Router>
           <div className="app">
             <Routes>
@@ -65,7 +68,7 @@ const Layout = ({ children }) => {
       )}
       <Menu />
       <div className="app__inner-content">
-        <CurrentUser/>
+        <CurrentUser />
         {children}
       </div>
     </div>

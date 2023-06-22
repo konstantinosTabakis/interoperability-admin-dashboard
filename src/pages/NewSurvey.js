@@ -5,6 +5,7 @@ import { createSurvey, getAllQuestions } from "../db/db-services"
 import { useNavigate } from "react-router-dom"
 import chevronLeft from '../assets/img/chevrons-left.svg'
 import chevronRight from '../assets/img/chevrons-right.svg'
+import { toast } from 'react-toastify'
 
 
 function NewSurvey() {
@@ -35,7 +36,6 @@ function NewSurvey() {
     }
     const handleDrop = (e) => {
         const id = e.dataTransfer.getData('id')
-        console.log(id);
         setSelectedQuestions([...selectedQuestions, ...availableQuestions.filter((question) => question.id == id)])
         setAvailableQuestions(availableQuestions.filter((question) => question.id != id))
     }
@@ -74,7 +74,9 @@ function NewSurvey() {
 
     const handleSubmit = async () => {
         if (name === '' || description === '' || selectedQuestions.length === 0) {
-            alert('Coplete all fields')
+            toast.error('Please complete all fields and select questions', {
+                position: toast.POSITION.TOP_CENTER
+            })
         } else {
             const newSurvey = {
                 name,
@@ -82,11 +84,12 @@ function NewSurvey() {
                 label,
                 questions: selectedQuestions
             }
-            console.log('new Survey:', newSurvey);
-            dispatch({ type: 'CREATE_SURVEY', survey: newSurvey })
-            const response = await createSurvey(newSurvey);
+            const id = await createSurvey(newSurvey);
+            dispatch({ type: 'CREATE_SURVEY', survey: {id, ...newSurvey} })
+            toast.success('The new survey was created', {
+                position: toast.POSITION.TOP_CENTER
+            })
             navigate('/surveys')
-            // alert('Survey Submited')
         }
     }
 
