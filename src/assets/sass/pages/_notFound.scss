@@ -1,0 +1,21 @@
+.notFound {
+    @include outer-container;
+    max-width: none;
+    width: 100%;
+    position: relative;
+    background-image: url('../img/bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    &__inner{
+        @include absolute-center;
+        padding: 6.4rem;        
+            
+    }
+    .heading-primary{
+        font-size: 12rem;
+        line-height: 12rem;
+    }
+    p{
+        font-size: 2rem;
+    }
+}
