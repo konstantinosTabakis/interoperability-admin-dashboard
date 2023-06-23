@@ -17,6 +17,7 @@ import UserContext from "./context/UserContext";
 import { useContext } from "react";
 import CurrentUser from "./components/CurrentUser";
 import About from "./pages/About";
+import NotFound from "./pages/NotFound";
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
                 <Route path="/about" element={<Layout><About /></Layout>} />
               </Route>
               <Route path="/signIn" element={<SignIn />} />
+              <Route path="/*" element={<NotFound />} />
             </Routes>
           </div>
         </Router>

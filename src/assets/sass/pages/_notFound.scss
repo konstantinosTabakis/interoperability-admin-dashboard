@@ -1,0 +1,20 @@
+.notFound {
+    @include outer-container;
+    max-width: none;
+    width: 100%;
+    position: relative;
+    background-image: url(https://img.freepik.com/free-vector/background-with-natural-landscape-concept_23-2148650299.jpg?w=1380&t=st=1687526312~exp=1687526912~hmac=5dfb9c8903aa840ecd8c6b7311773b10a66fb99ea3dbe5c92b337233baa27ac3);
+    background-size: cover;
+    &__inner{
+        @include absolute-center;
+        padding: 6.4rem;        
+            
+    }
+    .heading-primary{
+        font-size: 12rem;
+        line-height: 12rem;
+    }
+    p{
+        font-size: 1.4rem;
+    }
+}
