@@ -8,8 +8,9 @@
     }
 
     &__filters {
-        @include flex(space-around, center, 10px);
+        @include flex(space-between, center, 10px);
         padding-bottom: 3.2rem;
+        overflow-x: auto;
 
         .item {
             label {
@@ -32,8 +33,11 @@
 
 
     &__stats {
-        @include flex(space-around, center, 10px);
-
+        // @include flex(space-around, center, 10px);
+        display: grid;
+        grid-gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
+        justify-content: space-around;
         .card {
             background-color: $color-bg-light;
             min-width: 120px;

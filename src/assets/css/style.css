@@ -6,6 +6,12 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0 12px 12px 0;
   color: #fff; }
+  .navigation svg {
+    fill: #fff;
+    height: 50px;
+    width: 35px;
+    display: none;
+    cursor: pointer; }
   .navigation .loggedUser {
     font-weight: 300;
     font-size: 1.4rem;
@@ -36,17 +42,30 @@
         position: absolute;
         left: -15px; }
 
+@media screen and (max-width: 900px) {
+  .navigation {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 30;
+    display: none; }
+    .navigation svg {
+      display: block; }
+    .navigation.open {
+      display: block; } }
+
 .card {
   background: #fff;
   border-radius: 12px;
   padding: 3.2rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); }
   .card__inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 0;
-    flex-wrap: wrap; }
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    justify-content: center;
+    grid-row-gap: 20px;
+    grid-column-gap: 20px; }
     .card__inner-item {
       display: flex;
       align-items: center;
@@ -68,6 +87,13 @@
 
 .card-small {
   padding: 1.6rem; }
+
+@media screen and (max-width: 600px) {
+  .card__inner-item .icon-area {
+    padding: 20px; }
+    .card__inner-item .icon-area img {
+      width: 20px;
+      height: 20px; } }
 
 .survey {
   position: relative; }
@@ -130,13 +156,20 @@
     display: flex;
     align-items: center;
     justify-content: unset;
-    gap: 25px; }
+    gap: 25px;
+    flex-wrap: wrap; }
     .survey .btn-wrapper .btn-download {
       border: none;
       cursor: pointer;
       background: none; }
     .survey .btn-wrapper img {
       width: 30px; }
+
+@media screen and (max-width: 600px) {
+  .survey {
+    position: relative; }
+    .survey .icon-area {
+      display: none; } }
 
 .wrapper__json {
   max-width: 100%;
@@ -151,12 +184,18 @@
   z-index: 1;
   right: 3.2rem;
   top: 3.2rem; }
+  .current-user svg {
+    width: 35px;
+    height: 50px;
+    cursor: pointer;
+    display: none; }
   .current-user img {
     width: 50px;
     cursor: pointer; }
   .current-user .drop-down-menu {
     position: absolute;
     left: -320px;
+    top: 100%;
     width: 350px;
     text-align: center;
     font-size: 1.4rem; }
@@ -164,6 +203,17 @@
       cursor: pointer;
       padding: 1rem;
       font-size: 1.4rem; }
+
+@media screen and (max-width: 900px) {
+  .current-user {
+    display: flex;
+    align-items: center;
+    justify-content: unset;
+    gap: 10px; }
+    .current-user svg {
+      display: block; }
+    .current-user .drop-down-menu {
+      left: -250px; } }
 
 .home {
   position: relative;
@@ -275,25 +325,37 @@
       .newSurvey__questions-available .questions-container, .newSurvey__questions-selected .questions-container {
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); }
         .newSurvey__questions-available .questions-container .questions-heading, .newSurvey__questions-selected .questions-container .questions-heading {
-          height: 70px;
           padding: 1.6rem;
           background: #fff;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 0; }
+          gap: 5px;
+          flex-wrap: wrap; }
           .newSurvey__questions-available .questions-container .questions-heading div, .newSurvey__questions-selected .questions-container .questions-heading div {
             display: flex;
             align-items: center;
             justify-content: unset;
-            gap: 20px; }
+            gap: 20px;
+            flex-wrap: wrap; }
           .newSurvey__questions-available .questions-container .questions-heading .icons, .newSurvey__questions-selected .questions-container .questions-heading .icons {
             display: flex;
             align-items: unset;
             justify-content: unset;
-            gap: 10px; }
+            gap: 10px;
+            flex-wrap: wrap; }
             .newSurvey__questions-available .questions-container .questions-heading .icons button, .newSurvey__questions-selected .questions-container .questions-heading .icons button {
               cursor: pointer; }
+
+@media screen and (max-width: 900px) {
+  .newSurvey__questions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    flex-direction: column; }
+    .newSurvey__questions-available, .newSurvey__questions-selected {
+      width: 100%; } }
 
 .users {
   position: relative;
@@ -410,9 +472,10 @@
   .evaluations__filters {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 10px;
-    padding-bottom: 3.2rem; }
+    padding-bottom: 3.2rem;
+    overflow-x: auto; }
     .evaluations__filters .item label {
       display: block;
       margin-bottom: 4px;
@@ -423,10 +486,10 @@
     .evaluations__filters-wrapper {
       border-bottom: 2px solid rgba(214, 214, 214, 0.384); }
   .evaluations__stats {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 10px; }
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
+    justify-content: space-around; }
     .evaluations__stats .card {
       background-color: #FEFCF3;
       min-width: 120px; }
@@ -503,6 +566,10 @@ textarea {
   .app__inner-content {
     width: 100%; }
 
+@media screen and (max-width: 700px) {
+  .app__inner .heading-primary:first-of-type {
+    margin-top: 50px; } }
+
 @font-face {
   font-family: montserrat;
   src: url(../fonts/Montserrat-VariableFont_wght.ttf); }
@@ -528,6 +595,10 @@ body {
 .bold {
   font-weight: 700; }
 
+@media screen and (max-width: 500px) {
+  html {
+    font-size: 50%; } }
+
 .btn {
   cursor: pointer;
   padding: 1.6rem 4.6rem;
@@ -539,6 +610,12 @@ body {
   min-width: 200px; }
   .btn:hover {
     transform: scale(0.95) translateY(2px); }
+
+@media screen and (max-width: 350px) {
+  .btn {
+    font-size: 1.2rem;
+    min-width: auto;
+    width: 100%; } }
 
 .btn-primary {
   border: none;
@@ -608,7 +685,7 @@ body {
   width: 95%;
   max-width: 500px;
   z-index: 100;
-  max-height: 600px;
+  max-height: 80vh;
   overflow-y: auto; }
   .modal .btn-area {
     text-align: end; }

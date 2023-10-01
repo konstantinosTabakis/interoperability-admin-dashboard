@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { auth } from "../db/firebase.config"
 import UserContext from "../context/UserContext";
 import avatar from "../assets/img/avatar2.png";
+import {BsList} from 'react-icons/bs'
 
 function CurrentUser() {
     const { currentUserEmail, dispatch } = useContext(UserContext);
@@ -16,6 +17,10 @@ function CurrentUser() {
         auth.signOut()
         navigate('/signIn')
     };
+
+    const handleMenu = () =>{
+        document.getElementById('navigation').classList.add('open')
+    }
 
     const handleImageFocus = () => {
         setMenuOpen(true);
@@ -42,6 +47,7 @@ function CurrentUser() {
 
     return (
         <div className="current-user">
+            <BsList onClick={handleMenu}/>
             <img
                 src={avatar}
                 alt="avatar image"

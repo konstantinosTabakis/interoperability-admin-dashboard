@@ -87,7 +87,7 @@
 
     .btn-wrapper {
         @include flex(unset, center, 25px);
-
+        flex-wrap: wrap;
         .btn-download {
             border: none;
             cursor: pointer;
@@ -98,8 +98,14 @@
             width: 30px;
         }
     }
+}
 
-
-
-
+@media screen and (max-width: 600px) {
+    .survey {
+        position: relative;
+        .icon-area {
+             display: none
+        }
+    
+    }
 }
