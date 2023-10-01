@@ -49,7 +49,7 @@ function Evaluations() {
     const handleFilter = (evaluations) => {
 
         const filteredEvaluations = evaluations.filter(item => {
-            if (survey && item.survey !== survey) {
+            if (survey && item.survey_id !== survey) {
                 return false
             }
             if (type && item.surveyLabel !== type) {
@@ -165,7 +165,7 @@ function Evaluations() {
                             <select id="survey" className="input-basic" onChange={handleChange}>
                                 <option value="">All</option>
                                 {surveys.map((el) => (
-                                    <option key={el.id} value={el.name}>{el.name}</option>
+                                    <option key={el.id} value={el.id}>{el.name}</option>
                                 ))}
                             </select>
                         </div>

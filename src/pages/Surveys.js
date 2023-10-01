@@ -29,6 +29,10 @@ function Surveys() {
         setDisplayedSurveys(e.target.value === 'all'? surveys: surveys.filter(el =>  el.created_from === currentUserEmail))
     }
 
+    const deleteSurvey = (id) =>{
+        setDisplayedSurveys(displayedSurveys.filter(survey => survey.id != id))
+    }
+
     return (
         <section className="surveys">
             <h4 className="heading-primary ">Surveys</h4>
@@ -54,7 +58,7 @@ function Surveys() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }} >
-                            <Survey survey={el} />
+                            <Survey survey={el} deleteSurvey={deleteSurvey} />
 
                         </motion.div>
                     ))}

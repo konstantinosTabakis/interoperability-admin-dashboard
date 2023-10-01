@@ -5,18 +5,19 @@ import downloadIcon from '../assets/img/download.png'
 import DeleteModal from './DeleteModal'
 import { motion, AnimatePresence } from 'framer-motion'
 import { jsonWriter } from '../utils/writers'
-import {BsFillPersonFill} from 'react-icons/bs'
+import { BsFillPersonFill } from 'react-icons/bs'
 
 
-function Survey({ survey }) {
+function Survey({ survey, deleteSurvey }) {
 
     const createdAtDate = new Date(survey.created_at.seconds * 1000 + survey.created_at.nanoseconds / 1e6);
     const formattedDate = createdAtDate.toLocaleDateString('en-GB'); // 'en-GB' represents the format DD/MM/YYYY
-    
-    const { currentUserRole,currentUserEmail, dispatch } = useContext(UserContext)
+
+    const { currentUserRole, currentUserEmail, dispatch } = useContext(UserContext)
     const [deleting, setDeleting] = useState(false)
 
     const handleDelete = async () => {
+        if(deleting) deleteSurvey(survey.id)
         dispatch({ type: 'TOGGLE_TRANSPARENT' })
         setDeleting(!deleting)
     }
@@ -38,7 +39,7 @@ function Survey({ survey }) {
                 <h4 className="heading-secondary mg-b-tiny">
                     {survey.name}
                 </h4>
-                <p className='mg-b-tiny survey__data'> <BsFillPersonFill/> {survey.created_from} on {formattedDate} </p>
+                <p className='mg-b-tiny survey__data'> <BsFillPersonFill /> {survey.created_from} on {formattedDate} </p>
                 {/* <h5>Description</h5> */}
                 <p> {survey.description}  </p>
                 <input type="checkbox" id={survey.id} />
@@ -55,8 +56,10 @@ function Survey({ survey }) {
                 </div>
                 <div className='btn-wrapper mg-t-tiny'>
 
-                    {(currentUserRole === 'admin' && currentUserEmail === survey.created_from) &&(
-                        <button className="btn btn-primary " onClick={handleDelete}>Delete Survey</button>
+                    <a className="btn btn-primary centered" href={process.env.REACT_APP_EVALUATOR_DOMAIN + `/select/${survey.id}`} target="_blank"  >Execute</a>
+
+                    {(currentUserRole === 'admin' && currentUserEmail === survey.created_from) && (
+                        <button className="btn btn-secondary " onClick={handleDelete}>Delete Survey</button>
                     )}
 
                     <button className='btn-download' onClick={downloadJSON}>

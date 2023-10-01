@@ -65,17 +65,19 @@
                 box-shadow: $shadow-primary;
                 
                 .questions-heading{
-                    height: 70px;
                     padding:  1.6rem;
                     background: $color-white;
-                    @include flex(space-between, center);
+                    @include flex(space-between, center, 5px);
+                    flex-wrap: wrap;
 
                     div{
                         @include flex(unset, center, 20px);
+                        flex-wrap: wrap
                     }
 
                     .icons{
                         @include flex(unset,unset, 10px);
+                        flex-wrap: wrap;
                         button{
                             cursor: pointer;
                         }
@@ -84,5 +86,22 @@
             }
         }
 
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .newSurvey{
+        
+    
+        &__questions{
+            @include flex(space-between, center, 30px);
+            flex-direction: column;
+            
+            
+            &-available, &-selected{
+                width: 100%;
+            }
+    
+        }
     }
 }

@@ -3,6 +3,14 @@
     z-index: 1;
     right: $padding-default;
     top: $padding-default;
+
+    svg{
+        width: 35px;
+        height: 50px;
+        cursor: pointer;
+        display: none;
+    }
+
     img{
         width: 50px;
         cursor: pointer;
@@ -11,6 +19,7 @@
     .drop-down-menu{
         position: absolute;
         left: -320px;
+        top: 100%;
         width: 350px;
         text-align: center;
         font-size: 1.4rem;
@@ -20,6 +29,20 @@
             padding: 1rem;
             font-size: 1.4rem;
             // background: $color-red-warning;
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .current-user{
+        @include flex(unset, center, 10px);
+    
+        svg{
+            display: block;
+        }
+    
+        .drop-down-menu{
+            left: -250px;           
         }
     }
 }

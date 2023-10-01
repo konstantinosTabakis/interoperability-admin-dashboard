@@ -5,9 +5,15 @@
     box-shadow: $shadow-secondary;
 
     &__inner{
-        @include flex(space-around, center);
-        flex-wrap: wrap;
+        // @include flex(space-around, center);
+        // flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        justify-content: center;
+        grid-row-gap: 20px;
+        grid-column-gap: 20px;
         &-item{
+            // background: red;
             @include flex(unset, center, 10px);
             .icon-area{
                 background: $color-tertiary;
@@ -31,4 +37,25 @@
 }
 .card-small{
     padding: 1.6rem;
+}
+
+@media screen and (max-width: 600px) {
+    .card{
+      
+    
+        &__inner{
+            &-item{
+                // background: red;
+                .icon-area{
+                    padding: 20px;
+                    img{
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+    
+            }
+            
+        }
+    }
 }

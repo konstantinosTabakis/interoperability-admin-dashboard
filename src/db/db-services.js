@@ -106,7 +106,7 @@ export const createSurvey = async (newSurvey) => {
 }
 
 export const deleteSurvey = async (id) => {
-    const coll = doc(db, "surveys", id);
+    const coll = doc(db, "surveys_prod", id);
     return await deleteDoc(coll);
 }
 
@@ -153,7 +153,7 @@ export const deleteQuestion = async () => {
 
 //Evaluations
 export const getEvaluationsNumber = async () => {
-    const coll = collection(db, 'evaluations');
+    const coll = collection(db, 'evaluations_prod');
     const querySnapshot = await getDocs(coll);
 
     const evaluations = querySnapshot.docs.map((doc) => {
