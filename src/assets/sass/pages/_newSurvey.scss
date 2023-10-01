@@ -16,6 +16,15 @@
         }
     }
 
+    .modal{
+        span{
+            font-weight: 700
+        }
+        img{
+            width: 80px;
+        }
+    }
+
     &__questions{
         @include flex(space-between, unset, 30px);
         
@@ -24,6 +33,24 @@
             overflow-y: auto;
             background: rgb(208, 205, 205);
             padding: 10px;
+
+            &-utils{
+                @include flex(unset, center, 10px);
+                img{
+                    width: 20px;
+                }
+
+            }
+
+
+            button{
+                border: none;
+                outline: none;
+                background: none;
+                cursor: pointer;
+                color: $color-primary;
+                font-size: 1.6rem;
+            }
         }
         
         &-available, &-selected{
@@ -42,6 +69,10 @@
                     padding:  1.6rem;
                     background: $color-white;
                     @include flex(space-between, center);
+
+                    div{
+                        @include flex(unset, center, 20px);
+                    }
 
                     .icons{
                         @include flex(unset,unset, 10px);

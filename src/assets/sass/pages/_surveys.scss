@@ -2,6 +2,25 @@
     @include outer-container;
     width: 100%;
 
+    &__filter{
+        display: none;
+
+        &-container{
+            @include flex(unset, center, 5px);
+        }
+    }
+    &__filter~ label{
+        padding: 6px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+
+    }
+    &__filter:checked~ label{
+        background: $color-primary;
+        color: #fff;
+        font-weight: 500;
+    }
+
     .modal{
         p{
             font-size: 1.8rem;

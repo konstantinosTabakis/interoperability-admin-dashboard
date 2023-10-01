@@ -56,15 +56,40 @@ export const addUser = async (userData) => {
 
 //surveys
 
+// export const getAllSurveys = async () => {
+//     const coll = collection(db, 'surveys_prod');
+//     const querySnapshot = await getDocs(coll);
+
+//     const surveys = querySnapshot.docs.map((doc) => {
+//         const surveyData = doc.data()
+//         const surveyId = doc.id
+//         return { id: surveyId, ...surveyData }
+//     });
+//     return surveys;
+// }
 export const getAllSurveys = async () => {
-    const coll = collection(db, 'surveys');
+    const coll = collection(db, 'surveys_prod');
     const querySnapshot = await getDocs(coll);
 
-    const surveys = querySnapshot.docs.map((doc) => {
-        const surveyData = doc.data()
-        const surveyId = doc.id
-        return { id: surveyId, ...surveyData }
-    });
+    const surveys = await Promise.all(querySnapshot.docs.map(async (surveyDoc) => {
+        const surveyData = surveyDoc.data();
+        const surveyId = surveyDoc.id;
+        const questionIds = surveyData.questions;
+
+        const questions = await Promise.all(questionIds.map(async (questionId) => {
+            const questionRef = doc(db, 'questions_prod', questionId);
+            const questionSnapshot = await getDoc(questionRef);
+            const questionData = questionSnapshot.data();
+            return { id: questionId, ...questionData };
+        }));
+
+        // console.log({ ...surveyData , id: surveyId, questions });
+
+        return {...surveyData , id: surveyId, questions};
+    }));
+
+    // console.log('All surveys:', surveys);
+
     return surveys;
 }
 
@@ -73,8 +98,9 @@ export const getSingleSurvey = async () => {
 }
 
 export const createSurvey = async (newSurvey) => {
-    const coll = collection(db, 'surveys');
-    const docRef = await addDoc(coll, newSurvey);
+    const coll = collection(db, 'surveys_prod');
+    const created_at = await serverTimestamp()
+    const docRef = await addDoc(coll, {...newSurvey, created_at});
     const surveyId = docRef.id;
     return surveyId;
 }
@@ -87,7 +113,7 @@ export const deleteSurvey = async (id) => {
 //questions
 
 export const getAllQuestions = async () => {
-    const coll = collection(db, 'questions');
+    const coll = collection(db, 'questions_prod');
     const querySnapshot = await getDocs(coll);
 
     const questions = querySnapshot.docs.map((doc) => {
@@ -104,7 +130,7 @@ export const getSingleQuestion = async () => {
 
 export const createQuestions = async (data) => {
     try {
-        const coll = collection(db, 'questions')
+        const coll = collection(db, 'questions_prod')
         const batch = writeBatch(db)
         const createdQuestionRefs = []
         for (const question of data) {

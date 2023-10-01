@@ -2,20 +2,25 @@ import { useContext, useEffect, useState } from "react"
 import SurveyContext from "../context/SurveyContext"
 import UserContext from "../context/UserContext"
 import { createSurvey, getAllQuestions } from "../db/db-services"
+import DetailsModal from "../components/DetailsModal"
 import { useNavigate } from "react-router-dom"
 import chevronLeft from '../assets/img/chevrons-left.svg'
 import chevronRight from '../assets/img/chevrons-right.svg'
 import { toast } from 'react-toastify'
+import { motion, AnimatePresence } from 'framer-motion'
+import deleteIcon from '../assets/img/delete.png'
 
 
 function NewSurvey() {
-    const { currentUserRole } = useContext(UserContext)
+    const { currentUserRole, currentUserEmail, dispatch: userDispatch } = useContext(UserContext)
     const { questions, dispatch } = useContext(SurveyContext)
     const [availableQuestions, setAvailableQuestions] = useState(questions)
     const [selectedQuestions, setSelectedQuestions] = useState([])
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [label, setLabel] = useState('general')
+    const [seeDetails, setSeeDetails] = useState(false)
+    const [seeDetailsQuestion, setSeeDetailsQuestion] = useState(null)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -50,26 +55,45 @@ function NewSurvey() {
     }
 
     const handleEmpty = () => {
-        setAvailableQuestions([...availableQuestions, ...selectedQuestions])
+        handleFilter()
         setSelectedQuestions([])
     }
     const handleFull = () => {
         setSelectedQuestions([...availableQuestions, ...selectedQuestions])
         setAvailableQuestions([])
     }
-    const handleFilter = (e) => {
-        const filter = e.target.value
-        if (filter === 'all') {
+    const handleRemoveQuestion = (id) =>{
+        setSelectedQuestions(selectedQuestions.filter(questions => questions.id != id))
+    }
+
+    const handleFilter = () => {
+        const sourceFilter = document.getElementById('newSurvey__source').value
+        const categoryFilter = document.getElementById('newSurvey__category').value
+
+        if (sourceFilter && categoryFilter) {
+            setAvailableQuestions(questions.filter((el) => el.type.includes(categoryFilter) && el.src === sourceFilter))
+        } else if (sourceFilter) {
+            setAvailableQuestions(questions.filter((el) => el.src === sourceFilter))
+        } else if (categoryFilter) {
+            setAvailableQuestions(questions.filter((el) => el.type.includes(categoryFilter)))
+        } else {
             setAvailableQuestions(questions)
-        } else if (filter === 'legal') {
-            setAvailableQuestions(questions.filter((el) => el.type.includes('LIMAPS')))
-        } else if (filter === 'organisational') {
-            setAvailableQuestions(questions.filter((el) => el.type.includes('OIMAPS')))
-        } else if (filter === 'semantic') {
-            setAvailableQuestions(questions.filter((el) => el.type.includes('SIMAPS')))
-        } else if (filter === 'technical') {
-            setAvailableQuestions(questions.filter((el) => el.type.includes('TIMAPS')))
         }
+    }
+
+    const getValues = () => {
+        const uniqueValues = new Set();
+        questions.forEach((item) => {
+            uniqueValues.add(item.src);
+
+        });
+        return Array.from(uniqueValues);
+    };
+
+    const handleSeeDetails = (question) => {
+        userDispatch({ type: 'TOGGLE_TRANSPARENT' })
+        setSeeDetailsQuestion(question ? question : null)
+        setSeeDetails(!seeDetails)
     }
 
     const handleSubmit = async () => {
@@ -78,14 +102,18 @@ function NewSurvey() {
                 position: toast.POSITION.TOP_CENTER
             })
         } else {
+            const currentDate = new Date();
+            const formattedCurrentDate = currentDate.toLocaleDateString('en-GB');
+
             const newSurvey = {
                 name,
                 description,
                 label,
-                questions: selectedQuestions
+                questions: selectedQuestions,
+                created_from: currentUserEmail
             }
-            const id = await createSurvey(newSurvey);
-            dispatch({ type: 'CREATE_SURVEY', survey: {id, ...newSurvey} })
+            const id = await createSurvey({ ...newSurvey, questions: selectedQuestions.map(question => question.id) });
+            dispatch({ type: 'CREATE_SURVEY', survey: { id, ...newSurvey, created_at: formattedCurrentDate } })
             toast.success('The new survey was created', {
                 position: toast.POSITION.TOP_CENTER
             })
@@ -112,7 +140,7 @@ function NewSurvey() {
                     <label htmlFor="description" className="mg-b-tiny">Description</label>
                     <textarea value={description} id="description" className="input-basic mg-b-small" placeholder='Description of Survey' onChange={handleChange}></textarea>
                     <label htmlFor="label" className="mg-b-tiny">Label</label>
-                    <select id="label" className="input-basic mg-b-small" onChange={handleChange}>
+                    <select id="label" className="input-basic mg-b-small w-100" onChange={handleChange}>
                         <option value="general">General</option>
                         <option value="legal">Legal</option>
                         <option value="organisational">Organisational</option>
@@ -129,20 +157,31 @@ function NewSurvey() {
                     <div className="questions-container">
                         <h5 className="questions-heading">
                             <span>Total: {availableQuestions.length}</span>
-                            <span>
-                                <select id="" className="input-basic" onChange={handleFilter}>
-                                    <option value="all">All</option>
+                            <div>
+                                <select id="newSurvey__category" className="input-basic" onChange={handleFilter}>
+                                    <option value="">All Categories</option>
                                     <option value="legal">Legal</option>
                                     <option value="organisational">Organisational</option>
                                     <option value="semantic">Semantic</option>
                                     <option value="technical">Technical</option>
                                 </select>
-                            </span>
+                                <select id="newSurvey__source" className="input-basic" onChange={handleFilter}>
+                                    <option value="">All Sources</option>
+                                    {getValues().map((el, index) => (
+                                        <option key={index} value={el}>{el}</option>
+                                    ))}
+                                </select>
+                            </div>
                         </h5>
                         <div className="questions-inner">
                             {availableQuestions.map((el, index) => (
                                 <div className="card card-small mg-b-tiny" key={index} draggable onDragStart={() => handleDrag(el.id, event)} >
-                                    {el.question}
+                                    <div className="mg-b-tiny">
+                                        {el.question}
+                                    </div>
+                                    <button className="" onClick={() => handleSeeDetails(el)}>
+                                        See Details
+                                    </button>
                                 </div>
                             ))}
                         </div>
@@ -166,8 +205,19 @@ function NewSurvey() {
                         <div className="questions-inner" onDragOver={handleDragOver} onDrop={handleDrop}>
                             {selectedQuestions.map((el, index) => (
                                 <div className="card card-small mg-b-tiny" key={index}>
-                                    {el.question}
+                                    <div className="mg-b-tiny">
+                                        {el.question}
+                                    </div>
+                                    <div className="questions-inner-utils">
+                                        <button className="" onClick={() => handleSeeDetails(el)}>
+                                            See Details
+                                        </button>
+                                        <button onClick={()=> handleRemoveQuestion(el.id)}>
+                                            <img src={deleteIcon} alt="delete Icon" />
+                                        </button>
+                                    </div>
                                 </div>
+
                             ))}
                         </div>
                     </div>
@@ -179,6 +229,18 @@ function NewSurvey() {
                     Submit Survey
                 </button>
             </div>
+
+            {seeDetails && (
+                <AnimatePresence>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }} >
+                        <DetailsModal handleSeeDetails={handleSeeDetails} question={seeDetailsQuestion} />
+                    </motion.div>
+                </AnimatePresence>
+            )}
+
         </section>
     )
 }

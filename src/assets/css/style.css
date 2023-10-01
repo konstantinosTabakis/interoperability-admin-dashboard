@@ -73,6 +73,13 @@
   position: relative; }
   .survey [type='checkbox'] {
     display: none; }
+  .survey__data {
+    display: flex;
+    align-items: center;
+    justify-content: unset;
+    gap: 5px;
+    font-style: italic;
+    font-size: 1.4rem; }
   .survey [type='checkbox'] ~ label {
     color: #DBA39A;
     cursor: pointer;
@@ -193,6 +200,21 @@
   max-width: 1400px;
   margin: 0 auto;
   width: 100%; }
+  .surveys__filter {
+    display: none; }
+    .surveys__filter-container {
+      display: flex;
+      align-items: center;
+      justify-content: unset;
+      gap: 5px; }
+  .surveys__filter ~ label {
+    padding: 6px 16px;
+    border-radius: 8px;
+    cursor: pointer; }
+  .surveys__filter:checked ~ label {
+    background: #DBA39A;
+    color: #fff;
+    font-weight: 500; }
   .surveys .modal p {
     font-size: 1.8rem; }
   .surveys .modal .deleteIcon {
@@ -216,6 +238,10 @@
     .newSurvey__data label {
       display: block;
       font-weight: 500; }
+  .newSurvey .modal span {
+    font-weight: 700; }
+  .newSurvey .modal img {
+    width: 80px; }
   .newSurvey__questions {
     display: flex;
     align-items: unset;
@@ -226,6 +252,20 @@
       overflow-y: auto;
       background: #d0cdcd;
       padding: 10px; }
+      .newSurvey__questions .questions-inner-utils {
+        display: flex;
+        align-items: center;
+        justify-content: unset;
+        gap: 10px; }
+        .newSurvey__questions .questions-inner-utils img {
+          width: 20px; }
+      .newSurvey__questions .questions-inner button {
+        border: none;
+        outline: none;
+        background: none;
+        cursor: pointer;
+        color: #DBA39A;
+        font-size: 1.6rem; }
     .newSurvey__questions-available, .newSurvey__questions-selected {
       width: 50%; }
       .newSurvey__questions-available .heading-secondary, .newSurvey__questions-selected .heading-secondary {
@@ -242,6 +282,11 @@
           align-items: center;
           justify-content: space-between;
           gap: 0; }
+          .newSurvey__questions-available .questions-container .questions-heading div, .newSurvey__questions-selected .questions-container .questions-heading div {
+            display: flex;
+            align-items: center;
+            justify-content: unset;
+            gap: 20px; }
           .newSurvey__questions-available .questions-container .questions-heading .icons, .newSurvey__questions-selected .questions-container .questions-heading .icons {
             display: flex;
             align-items: unset;
@@ -478,7 +523,7 @@ body {
 
 .heading-secondary {
   font-size: 2.4rem;
-  font-weight: 500; }
+  font-weight: 600; }
 
 .bold {
   font-weight: 700; }
@@ -562,7 +607,9 @@ body {
   position: fixed;
   width: 95%;
   max-width: 500px;
-  z-index: 100; }
+  z-index: 100;
+  max-height: 600px;
+  overflow-y: auto; }
   .modal .btn-area {
     text-align: end; }
     .modal .btn-area button {

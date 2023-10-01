@@ -1,7 +1,14 @@
 .survey {
     position: relative;
+
     [type='checkbox'] {
         display: none;
+    }
+
+    &__data {
+        @include flex(unset, center, 5px);
+        font-style: italic;
+        font-size: 1.4rem;
     }
 
 
@@ -31,8 +38,9 @@
             ol {
                 padding: 1.6rem;
                 margin-left: 1.6rem;
-                li{
-                    list-style:auto;
+
+                li {
+                    list-style: auto;
                     padding: 1rem;
                 }
 
@@ -50,19 +58,22 @@
         &~.survey__questions {
             max-height: 400px;
             overflow: auto;
-            transition: max-height .8s ease-out;            
+            transition: max-height .8s ease-out;
         }
     }
-    .icon-area{
+
+    .icon-area {
         background: $color-tertiary;
         position: absolute;
         right: 3.6rem;
         border-radius: 50%;
         padding: 1rem 1.5rem;
-        img{
+
+        img {
             width: 30px;
         }
-        span{
+
+        span {
             position: absolute;
             bottom: -30px;
             left: 50%;
@@ -73,15 +84,17 @@
             font-size: 1.4rem;
         }
     }
-    .btn-wrapper{
-        @include flex(unset,center, 25px);
 
-        .btn-download{
+    .btn-wrapper {
+        @include flex(unset, center, 25px);
+
+        .btn-download {
             border: none;
             cursor: pointer;
             background: none;
         }
-        img{
+
+        img {
             width: 30px;
         }
     }

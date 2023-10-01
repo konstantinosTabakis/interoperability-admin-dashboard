@@ -5,10 +5,15 @@ import downloadIcon from '../assets/img/download.png'
 import DeleteModal from './DeleteModal'
 import { motion, AnimatePresence } from 'framer-motion'
 import { jsonWriter } from '../utils/writers'
+import {BsFillPersonFill} from 'react-icons/bs'
 
 
 function Survey({ survey }) {
-    const { currentUserRole, dispatch } = useContext(UserContext)
+
+    const createdAtDate = new Date(survey.created_at.seconds * 1000 + survey.created_at.nanoseconds / 1e6);
+    const formattedDate = createdAtDate.toLocaleDateString('en-GB'); // 'en-GB' represents the format DD/MM/YYYY
+    
+    const { currentUserRole,currentUserEmail, dispatch } = useContext(UserContext)
     const [deleting, setDeleting] = useState(false)
 
     const handleDelete = async () => {
@@ -33,10 +38,12 @@ function Survey({ survey }) {
                 <h4 className="heading-secondary mg-b-tiny">
                     {survey.name}
                 </h4>
+                <p className='mg-b-tiny survey__data'> <BsFillPersonFill/> {survey.created_from} on {formattedDate} </p>
+                {/* <h5>Description</h5> */}
                 <p> {survey.description}  </p>
                 <input type="checkbox" id={survey.id} />
                 <label htmlFor={survey.id}>Show Questions</label>
-                <div className="survey__questions mg-t-tiny">
+                <div className="survey__questions ">
                     <ol>
                         {survey.questions && survey.questions.map((el) => (
                             <li key={el.id}>
@@ -46,9 +53,9 @@ function Survey({ survey }) {
                         ))}
                     </ol>
                 </div>
-                <div className='btn-wrapper mg-t-small'>
+                <div className='btn-wrapper mg-t-tiny'>
 
-                    {currentUserRole === 'admin' && (
+                    {(currentUserRole === 'admin' && currentUserEmail === survey.created_from) &&(
                         <button className="btn btn-primary " onClick={handleDelete}>Delete Survey</button>
                     )}
 
