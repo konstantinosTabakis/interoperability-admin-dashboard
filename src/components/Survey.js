@@ -16,8 +16,8 @@ function Survey({ survey, deleteSurvey }) {
     const { currentUserRole, currentUserEmail, dispatch } = useContext(UserContext)
     const [deleting, setDeleting] = useState(false)
 
-    const handleDelete = async () => {
-        if(deleting) deleteSurvey(survey.id)
+    const handleDelete = async (act) => {
+        if (deleting && act !=='close') deleteSurvey(survey.id)
         dispatch({ type: 'TOGGLE_TRANSPARENT' })
         setDeleting(!deleting)
     }
