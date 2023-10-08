@@ -9,6 +9,7 @@ import chevronRight from '../assets/img/chevrons-right.svg'
 import { toast } from 'react-toastify'
 import { motion, AnimatePresence } from 'framer-motion'
 import deleteIcon from '../assets/img/delete.png'
+import {BsFillPlusCircleFill} from 'react-icons/bs'
 
 
 function NewSurvey() {
@@ -64,6 +65,10 @@ function NewSurvey() {
     }
     const handleRemoveQuestion = (id) =>{
         setSelectedQuestions(selectedQuestions.filter(questions => questions.id != id))
+    }
+    const handleAddQuestion = (id) =>{
+        setSelectedQuestions([...selectedQuestions, availableQuestions.filter(question=> question.id == id)[0]])
+        setAvailableQuestions(availableQuestions.filter(questions => questions.id != id))
     }
 
     const handleFilter = () => {
@@ -179,9 +184,12 @@ function NewSurvey() {
                                     <div className="mg-b-tiny">
                                         {el.question}
                                     </div>
-                                    <button className="" onClick={() => handleSeeDetails(el)}>
-                                        See Details
-                                    </button>
+                                    <div className="questions-inner-utils">
+                                        <button className="" onClick={() => handleSeeDetails(el)}>
+                                            See Details
+                                        </button>
+                                        <BsFillPlusCircleFill onClick={()=> handleAddQuestion(el.id)}/>
+                                    </div>
                                 </div>
                             ))}
                         </div>

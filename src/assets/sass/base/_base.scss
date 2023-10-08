@@ -25,7 +25,8 @@ textarea{
         @include flex(unset,unset,5px);
         position: relative;
         &-content{
-            width: 100%;
+            min-width: (70vw);
+            margin: 0 auto;
         }
     }
 }
@@ -35,6 +36,9 @@ textarea{
         &__inner{
             .heading-primary:first-of-type{
                 margin-top: 50px;            
+            }
+            &-content{
+                width: 100%;
             }
         }
     }

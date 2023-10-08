@@ -37,7 +37,10 @@
             &-utils{
                 @include flex(unset, center, 10px);
                 img{
-                    width: 20px;
+                    width: 15px;
+                }
+                svg{
+                    cursor: pointer;
                 }
 
             }
@@ -50,6 +53,7 @@
                 cursor: pointer;
                 color: $color-primary;
                 font-size: 1.6rem;
+                height: 15px;
             }
         }
         
