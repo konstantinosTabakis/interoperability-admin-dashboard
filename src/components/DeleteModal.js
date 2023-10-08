@@ -8,20 +8,20 @@ function DeleteModal({ handleDelete, survey }) {
 
     const { dispatch } = useContext(SurveyContext)
 
-    const closeModal = () => {
-        handleDelete();
+    const closeModal = (act) => {
+        handleDelete(act);
     };
 
-    const handleConfirm = async () => {
+    const handleConfirm = async (act) => {
         dispatch({ type: 'DELETE_SURVEY', id: survey.id })
         await deleteSurvey(survey.id)
-        closeModal()
+        closeModal(act)
     }
     return (
         <div className='card modal'>
             <div className="btn-area">
                 <button>
-                    <img src={exitIcon} onClick={closeModal} alt="exit icon" />
+                    <img src={exitIcon} onClick={()=> closeModal('close')} alt="exit icon" />
                 </button>
             </div>
             <div className="centered">
@@ -29,7 +29,7 @@ function DeleteModal({ handleDelete, survey }) {
             </div>
             <p className='centered '>You are about to delete <span className="bold">{survey.name}</span>,</p>
             <p className='centered mg-b-small'>Are you sure?</p>
-            <button className="btn btn-delete w-100" onClick={handleConfirm}>Confirm</button>
+            <button className="btn btn-delete w-100" onClick={()=>handleConfirm('delete')}>Confirm</button>
 
         </div>
     )
